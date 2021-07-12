@@ -349,23 +349,30 @@ scipy.integrate.odeint(func, y0, t, tfirst=True)
 ```
 
 * `func` : fonction qui renvoie le vecteur :
+
 $$\begin{pmatrix}
 v_k\\
 f(t, x, v)
 \end{pmatrix}
 $$
+
 Plus généralement, on utiliser la représentation matricielle :
+
 $$
 \begin{pmatrix}
 Y_{k+1} = Y_k + h * F(t, x, v)
 \end{pmatrix}
 $$
+
 avec 
+
 $$
 Y_k = \begin{pmatrix}
 x_k\\
 v_k
 \end{pmatrix}
+$$
+
 et $F$ une fonction qui renvoie un vecteur (deux valeurs). Ici le vecteur donné précédemment.
 * `y0` est un __vecteur__ donnant les conditions initiales.
 * `t` est le vecteur pour lequels les valeurs de $Y_k$ (positions et vitesses) seront calculées. (`t` doit être ordonné).

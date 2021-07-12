@@ -626,28 +626,30 @@ v_k + h \times f(t, x, v)
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">func</span></code> : fonction qui renvoie le vecteur :
-$<span class="math notranslate nohighlight">\(\begin{pmatrix}
+<li><p><code class="docutils literal notranslate"><span class="pre">func</span></code> : fonction qui renvoie le vecteur :</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{pmatrix}
 v_k\\
 f(t, x, v)
 \end{pmatrix}
-\)</span><span class="math notranslate nohighlight">\(
-Plus généralement, on utiliser la représentation matricielle :
-\)</span>$</p></li>
-</ul>
-<div class="amsmath math notranslate nohighlight" id="equation-fecd58f4-c2b9-426a-abff-d9058fb77102">
-<span class="eqno">(4.1)<a class="headerlink" href="#equation-fecd58f4-c2b9-426a-abff-d9058fb77102" title="Permalink to this equation">¶</a></span>\[\begin{pmatrix}
-Y_{k+1} = Y_k + h * F(t, x, v)
-\end{pmatrix}\]</div>
+\end{split}\]</div>
+<p>Plus généralement, on utiliser la représentation matricielle :</p>
 <div class="math notranslate nohighlight">
 \[
-avec 
+\begin{pmatrix}
+Y_{k+1} = Y_k + h * F(t, x, v)
+\end{pmatrix}
 \]</div>
-<p>Y_k = \begin{pmatrix}
-x_k\
+<p>avec</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Y_k = \begin{pmatrix}
+x_k\\
 v_k
 \end{pmatrix}
-et <span class="math notranslate nohighlight">\(F\)</span> une fonction qui renvoie un vecteur (deux valeurs). Ici le vecteur donné précédemment.</p>
+\end{split}\]</div>
+<p>et <span class="math notranslate nohighlight">\(F\)</span> une fonction qui renvoie un vecteur (deux valeurs). Ici le vecteur donné précédemment.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">y0</span></code> est un <strong>vecteur</strong> donnant les conditions initiales.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">t</span></code> est le vecteur pour lequels les valeurs de <span class="math notranslate nohighlight">\(Y_k\)</span> (positions et vitesses) seront calculées. (<code class="docutils literal notranslate"><span class="pre">t</span></code> doit être ordonné).</p></li>
