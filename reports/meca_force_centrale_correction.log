@@ -1,0 +1,75 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/miniconda3/envs/jupybook/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/ubuntu/miniconda3/envs/jupybook/lib/python3.9/site-packages/nbclient/client.py", line 1112, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/ubuntu/miniconda3/envs/jupybook/lib/python3.9/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/ubuntu/miniconda3/envs/jupybook/lib/python3.9/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/ubuntu/miniconda3/envs/jupybook/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/ubuntu/miniconda3/envs/jupybook/lib/python3.9/site-packages/nbclient/client.py", line 553, in async_execute
+    await self.async_execute_cell(
+  File "/home/ubuntu/miniconda3/envs/jupybook/lib/python3.9/site-packages/nbclient/client.py", line 857, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/ubuntu/miniconda3/envs/jupybook/lib/python3.9/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+def D_th(b, Ec0):
+    """Valeurs théoriques de l'angle de diffusion"""
+    beta = 1 / (2 * Ec0) * K1
+    return 2 * np.arctan(beta / b)
+
+def D_num(Y):
+    """Valeurs numériques de l'angle de diffusion"""
+    theta_f = Y[-1, 0]  # Angle theta final, on considère cet angle à l'infini
+    theta_i = Y[0, 0]  # Angle theta initial, on considère cet angle à l'infini
+    return np.pi - (theta_f - theta_i)  # Angle de diffusion
+
+D_ths = D_th(bs, Ec0)  # Angles de diffusion théoriques
+D_nums = []  # Angles de diffusion par intégration numérique
+for b in bs:
+    t, Y = deviation(b, Ec0, N)  # Intégration numérique
+    D_nums.append(D_num(Y))
+D_nums=np.array(D_nums)  # Transformation en vecteur numpy pour manipulations
+    
+f, ax= plt.subplots(2, 1, figsize=(12, 12))
+f.suptitle("Diffusion de Rutherford - Angle de diffusion")
+ax[0].plot(bs, D_nums, label="D numérique")
+ax[0].plot(bs, D_ths, label="D_théorique")
+ax[0].legend()
+
+ax[1].plot(1/bs, np.tan(D_nums / 2), label="D numérique")
+ax[1].plot(1/bs, np.tan(D_ths / 2), label="D_théorique")
+ax[1].legend()
+
+plt.show()
+
+"""
+BONUS : On va faire une régression linéaire sur les valeurs numériques pour vérifier qu'on a bien
+beta comme pente.
+"""
+beta_th = 1 / (2 * Ec0) * K1  # Valeur de pente attendue.
+beta_num, o_num = np.polyfit(1/bs, np.tan(D_ths / 2), 1)
+print("----------------")
+print("Beta théorique : {:.3f}".format(beta_th))
+print("Beta numérique : {:.3f}".format(beta_num))
+print("----------------")
+
+
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m<ipython-input-1-08d201f6c4a7>[0m in [0;36m<module>[0;34m[0m
+[1;32m     10[0m     [0;32mreturn[0m [0mnp[0m[0;34m.[0m[0mpi[0m [0;34m-[0m [0;34m([0m[0mtheta_f[0m [0;34m-[0m [0mtheta_i[0m[0;34m)[0m  [0;31m# Angle de diffusion[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     11[0m [0;34m[0m[0m
+[0;32m---> 12[0;31m [0mD_ths[0m [0;34m=[0m [0mD_th[0m[0;34m([0m[0mbs[0m[0;34m,[0m [0mEc0[0m[0;34m)[0m  [0;31m# Angles de diffusion théoriques[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     13[0m [0mD_nums[0m [0;34m=[0m [0;34m[[0m[0;34m][0m  [0;31m# Angles de diffusion par intégration numérique[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     14[0m [0;32mfor[0m [0mb[0m [0;32min[0m [0mbs[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mNameError[0m: name 'bs' is not defined
+NameError: name 'bs' is not defined
+

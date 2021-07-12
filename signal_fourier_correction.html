@@ -1,0 +1,835 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1. Analyse spectrale d’un signal &#8212; Capacités numériques - Corrigés</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://pcsi3physiquestan.github.io/capacite_numerique_c/signal_fourier_correction.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Résolution numérique d’une équation différentielle d’ordre 1" href="elec_reponse_o1_correction.html" />
+    <link rel="prev" title="Capacités numériques en physique" href="capacite_numerique_c.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://pcsi3physiquestan.github.io/capacite_numerique_c/signal_fourier_correction.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Analyse spectrale d’un signal" />
+<meta property="og:description" content="Analyse spectrale d’un signal  Méthodes numériques  Dans cette séance, vous allez apprendre à :  Utiliser les objets Python comme les vecteurs numpy  Créer une " />
+
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Capacités numériques - Corrigés</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="capacite_numerique_c.html">
+   Capacités numériques en physique
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1. Analyse spectrale d’un signal
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="elec_reponse_o1_correction.html">
+   2. Résolution numérique d’une équation différentielle d’ordre 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="elec_filtrage_correction.html">
+   3. Etude numérique d’un filtre linéaire
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="meca_non_lineaire_correction.html">
+   4. Système conservatif : Effets non linéaires.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="meca_pendule_correction.html">
+   5. Etude d’un pendule simple
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="meca_force_centrale_correction.html">
+   6. Etude d’un mouvement à force centrale
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="thermo_statique_correction.html">
+   7. Etude de l’atmosphère terrestre
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <a href="https://www.cedriclacpatia.fr">Site de la classe</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="_sources/signal_fourier_correction.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/signal_fourier_correction.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/signal_fourier_correction.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#position-du-probleme">
+   1.1. Position du problème
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#elements-theoriques">
+     1.1.1. Eléments théoriques
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reflexions-prelimineaires">
+     1.1.2. Réflexions préliminéaires
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#representation-des-signaux">
+     1.1.3. Représentation des signaux
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#representation-temporelle">
+       1.1.3.1. Représentation temporelle
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#representation-frequentielle">
+       1.1.3.2. Représentation fréquentielle.
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercice-1-du-spectre-a-la-representation-temporelle">
+   1.2. Exercice 1 : Du spectre à la représentation temporelle.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercice-2-du-trace-temporelle-au-spectre">
+   1.3. Exercice 2 : Du tracé temporelle au spectre
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quelques-explications-sur-le-repli-spectral">
+     1.3.1. Quelques explications sur le repli spectral.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solution-le-critere-de-shannon-nyquist">
+     1.3.2. SOLUTION : Le critère de Shannon-Nyquist
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="analyse-spectrale-d-un-signal">
+<h1><span class="section-number">1. </span>Analyse spectrale d’un signal<a class="headerlink" href="#analyse-spectrale-d-un-signal" title="Permalink to this headline">¶</a></h1>
+<p><em>Méthodes numériques</em></p>
+<p>Dans cette séance, vous allez apprendre à :</p>
+<ul class="simple">
+<li><p>Utiliser les objets Python comme les vecteurs numpy</p></li>
+<li><p>Créer une fonction qui construit numériquement l’allure d’un signal temporel à partir de son spectre.</p></li>
+<li><p>Obtenir le spectre d’un signal grâce à des fonctions natives de la bibliothèques <code class="docutils literal notranslate"><span class="pre">numpy.fft</span></code></p></li>
+</ul>
+<div class="section" id="position-du-probleme">
+<h2><span class="section-number">1.1. </span>Position du problème<a class="headerlink" href="#position-du-probleme" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="elements-theoriques">
+<h3><span class="section-number">1.1.1. </span>Eléments théoriques<a class="headerlink" href="#elements-theoriques" title="Permalink to this headline">¶</a></h3>
+<p>On rappelle que le <strong>spectre</strong> d’un signal est sa décomposition en somme de sinusoïdes où l’on donne : la <em>fréquence</em> (<span class="math notranslate nohighlight">\(f_i\)</span>), l’<em>amplitude</em> <span class="math notranslate nohighlight">\((A_i)\)</span> et la <em>phase à l’origine</em> (<span class="math notranslate nohighlight">\(\phi_i\)</span>) de chaque sinusoïde de la décomposition :</p>
+<div class="math notranslate nohighlight">
+\[
+s(t) = \sum_{i} A_i \cos \left ( 2 \pi f_i t + \phi_i \right )
+\]</div>
+<p><em>Pour rappel, pour les signaux périodiques, la somme est infinie et les fréquences <span class="math notranslate nohighlight">\(f_i\)</span> sont des multiples de la fréquence <span class="math notranslate nohighlight">\(f\)</span> du signal.</em></p>
+</div>
+<div class="section" id="reflexions-prelimineaires">
+<h3><span class="section-number">1.1.2. </span>Réflexions préliminéaires<a class="headerlink" href="#reflexions-prelimineaires" title="Permalink to this headline">¶</a></h3>
+<p><strong>But :</strong> On veut pouvoir représenter un signal de deux manières :</p>
+<ul class="simple">
+<li><p>son allure temporelle représentée mathématiquement par la fonction <span class="math notranslate nohighlight">\(x(t)\)</span> évaluée sur un intervalle <span class="math notranslate nohighlight">\([t_1, t_2]\)</span></p></li>
+<li><p>son spectre représenté par l’ensemble des triplets <span class="math notranslate nohighlight">\((f_i, A_i, \phi_i)\)</span> de sa décomposition</p></li>
+</ul>
+<p><strong>Travail (5/10minutes) :</strong> Réfléchir au(x) type(s) de variable(s) qui permettent, sous <code class="docutils literal notranslate"><span class="pre">Python</span></code> de stocker la représentation de l’allure temporelle (l’intervalle <span class="math notranslate nohighlight">\([t_1, t_2]\)</span> et les valeurs de x sur cet intervalle) et à leur structure puis au(x) type(s) de variable(s) qui permettent de stocker la représentation du spectre d’un signal <em>(on supposera la somme finie, quitte à limiter la somme à N fréquences dans le cas de sommes infinies)</em>.</p>
+<p><strong>Après avoir réfléchi à la question précédente</strong>, passer à la suite qui propose une représentation temporelle et fréquentielle sous Python.</p>
+</div>
+<div class="section" id="representation-des-signaux">
+<h3><span class="section-number">1.1.3. </span>Représentation des signaux<a class="headerlink" href="#representation-des-signaux" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="representation-temporelle">
+<h4><span class="section-number">1.1.3.1. </span>Représentation temporelle<a class="headerlink" href="#representation-temporelle" title="Permalink to this headline">¶</a></h4>
+<p>Dans un calcul numérique, l’évaluation de la fonction (pour sont tracé par exemple) ne peut être fait que pour des <strong>valeurs discrètes</strong>. On va donc définir pour un signal <span class="math notranslate nohighlight">\(s(t)\)</span> dont on connaît la fonction temporelle <span class="math notranslate nohighlight">\(s\)</span> :</p>
+<ol class="simple">
+<li><p>Une fonction qui associe à une valeur de temps <span class="math notranslate nohighlight">\(t_i\)</span> la valeur calculée <span class="math notranslate nohighlight">\(s(t_i)\)</span>.</p></li>
+<li><p>Un vecteur numpy contenant des valeurs d’abscisses temporelles <span class="math notranslate nohighlight">\(t_k\)</span> régulièrement réparties entre deux valeurs choisies <span class="math notranslate nohighlight">\(t_1\)</span> et <span class="math notranslate nohighlight">\(t_2\)</span> et de longueur <span class="math notranslate nohighlight">\(N\)</span>.</p></li>
+<li><p>Un vecteur numpy contenant les valeurs du signal <span class="math notranslate nohighlight">\(s_k\)</span> aux instants <span class="math notranslate nohighlight">\(t_k\)</span> : <span class="math notranslate nohighlight">\(s_k = s(t_k)\)</span>.</p></li>
+</ol>
+<p>On pourra alors tracer le signal temporel ou obtenir son spectre grâce aux fonctions natives de <code class="docutils literal notranslate"><span class="pre">numpy.fft</span></code></p>
+</div>
+<div class="section" id="representation-frequentielle">
+<h4><span class="section-number">1.1.3.2. </span>Représentation fréquentielle.<a class="headerlink" href="#representation-frequentielle" title="Permalink to this headline">¶</a></h4>
+<p>Il y a une série de trois grandeurs, on va donc représenter le spectre d’un signal par trois vecteurs :</p>
+<ul class="simple">
+<li><p>un contenant les fréquences <span class="math notranslate nohighlight">\(f_i\)</span> de la décomposition</p></li>
+<li><p>un contenant les amplitudes <span class="math notranslate nohighlight">\(A_i\)</span> de la décomposition</p></li>
+<li><p>un contenant les phases à l’origine <span class="math notranslate nohighlight">\(\phi_i\)</span> de la décomposition</p></li>
+</ul>
+<p>On pourra alors reconstruire la fonction <span class="math notranslate nohighlight">\(s(t)\)</span> comme donnée précédemment et ainsi visualiser son allure temporelle. On pourra aussi représenter le spectre du signal.</p>
+<p>On réfléchira aux listes des m premiers éléments des décompositions spectrales des signaux créneaux et triangulaires (de fréquence <span class="math notranslate nohighlight">\(f_0\)</span>) données ci-dessous :</p>
+<div class="math notranslate nohighlight">
+\[
+s_{creneau} = \sum_{k=1}^{m} {4 \over \pi (2k + 1)}\ \sin \left ( 2 \pi (2k + 1) f_0 t \right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+s_{triangle} = \sum_{k=1}^{m} {{(-1)}^k 8 \over {\left (\pi (2k + 1)\right)}^2}\ \sin \left ( 2 \pi (2k + 1) f_0 t \right)
+\]</div>
+</div>
+</div>
+</div>
+<div class="section" id="exercice-1-du-spectre-a-la-representation-temporelle">
+<h2><span class="section-number">1.2. </span>Exercice 1 : Du spectre à la représentation temporelle.<a class="headerlink" href="#exercice-1-du-spectre-a-la-representation-temporelle" title="Permalink to this headline">¶</a></h2>
+<p>Dans la cellule de code suivante, vous devez :</p>
+<blockquote>
+<div><ol class="simple">
+<li><p>Ecrire une fonction <code class="docutils literal notranslate"><span class="pre">fonc_temp</span></code> qui prend 4 arguments : 1 flottant <code class="docutils literal notranslate"><span class="pre">t</span></code> et 3 vecteurs numpy <code class="docutils literal notranslate"><span class="pre">fs</span></code>, <code class="docutils literal notranslate"><span class="pre">amps</span></code>, <code class="docutils literal notranslate"><span class="pre">phis</span></code> (liste des fréquences amplitudes et phases à l’origine du spectre) et qui renvoie la valeur de <code class="docutils literal notranslate"><span class="pre">s</span></code> définie dans les Eléments théoriques (plus haut) évaluée à l’instant <code class="docutils literal notranslate"><span class="pre">t</span></code>. Cette fonction devra être vectorialisable.</p></li>
+<li><p>Ecrire une fonction <code class="docutils literal notranslate"><span class="pre">evalue_temp</span></code> qui prend comme arguments : 3 vecteurs numpy <code class="docutils literal notranslate"><span class="pre">fs</span></code>, <code class="docutils literal notranslate"><span class="pre">amps</span></code>, <code class="docutils literal notranslate"><span class="pre">phis</span></code>, 2 flottants <code class="docutils literal notranslate"><span class="pre">t1</span></code>, <code class="docutils literal notranslate"><span class="pre">t2</span></code> et un entier <code class="docutils literal notranslate"><span class="pre">N</span></code> et qui renvoie deux vecteurs numpy:</p>
+<ol class="simple">
+<li><p>un vecteur contenant <code class="docutils literal notranslate"><span class="pre">N</span></code> valeurs de temps <code class="docutils literal notranslate"><span class="pre">t_k</span></code> régulièrement réparties entre <code class="docutils literal notranslate"><span class="pre">t1</span></code> et <code class="docutils literal notranslate"><span class="pre">t2</span></code></p></li>
+<li><p>un vecteur contenant les valeurs <code class="docutils literal notranslate"><span class="pre">s_k</span></code> qui sont les évaluatinos de <code class="docutils literal notranslate"><span class="pre">s</span></code> (définie dans les Eléments théoriques) aux instants <code class="docutils literal notranslate"><span class="pre">t_k</span></code></p></li>
+</ol>
+</li>
+<li><p>Ecrire une fonction <code class="docutils literal notranslate"><span class="pre">trace_spec</span></code> qui prend comme arguments 3 vecteurs numpy <code class="docutils literal notranslate"><span class="pre">fs</span></code>, <code class="docutils literal notranslate"><span class="pre">amps</span></code>, <code class="docutils literal notranslate"><span class="pre">phis</span></code> et qui trace le spectre du signal.</p></li>
+<li><p>Ecrire une fonction <code class="docutils literal notranslate"><span class="pre">trace_temp</span></code> qui prend comme arguments : 3 vecteurs numpy <code class="docutils literal notranslate"><span class="pre">fs</span></code>, <code class="docutils literal notranslate"><span class="pre">amps</span></code>, <code class="docutils literal notranslate"><span class="pre">phis</span></code>, 2 flottants <code class="docutils literal notranslate"><span class="pre">t1</span></code>, <code class="docutils literal notranslate"><span class="pre">t2</span></code> et un entier <code class="docutils literal notranslate"><span class="pre">N</span></code> et qui trace l’allure temporelle de <code class="docutils literal notranslate"><span class="pre">s</span></code> entre <code class="docutils literal notranslate"><span class="pre">t_1</span></code> et <code class="docutils literal notranslate"><span class="pre">t_2</span></code> en évaluant <code class="docutils literal notranslate"><span class="pre">N</span></code> valeurs de temps.</p></li>
+<li><p>Utiliser les fonctions précédentes pour tracer le spectre puis l’allure temporelle d’un signal créneau et d’un signal triangle à partir des <span class="math notranslate nohighlight">\(m\)</span> premières composantes spectrales de leur décomposition (m = 10) pour un fondamental à <span class="math notranslate nohighlight">\(f_0 = 1kHz\)</span>. On discutera de la validité d’approximer les signaux créneaux et triangle par leurs 10 premières composantes.</p></li>
+</ol>
+</div></blockquote>
+<p><em>Quelques indications utiles :</em></p>
+<ul class="simple">
+<li><p>Si une fonction retourne deux éléments (ex : return x, y) alors pour récuperer les <strong>deux</strong> variables lors de l’appel de la fonction, on écrira <code class="docutils literal notranslate"><span class="pre">x0,</span> <span class="pre">y0</span> <span class="pre">=</span> <span class="pre">fonction_appelee(...)</span></code></p></li>
+<li><p><em>Pour le tracé des spectres</em> : La fonction <code class="docutils literal notranslate"><span class="pre">bar(x,</span> <span class="pre">y,</span> <span class="pre">width,</span> <span class="pre">...)</span></code> de <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> fonctionne comme <code class="docutils literal notranslate"><span class="pre">plot</span></code> (mêmes options) mais trace des barres au lieu de points. L’argument <code class="docutils literal notranslate"><span class="pre">width</span></code> défini la largeur des barres, on prendra <code class="docutils literal notranslate"><span class="pre">100</span></code> (l’unité est en Hertz).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Quelques indications :</span>
+<span class="sd">- N&#39;oubliez d&#39;importer les bibliothèques scientifiques</span>
+<span class="sd">- Pensez à utiliser les fonctions précédentes au lieu de tout réécrire.</span>
+<span class="sd">- Pensez aux fonctions numpy pour créer simplement des vecteurs.</span>
+<span class="sd">- Attention aux phases, les expressions sont avec des sinus !</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">def</span> <span class="nf">fonc_temp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">amps</span><span class="p">,</span> <span class="n">phis</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>  <span class="c1"># Nombre de composantes spectrales</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Initialisation de la valeur du signal</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>  <span class="c1"># On va parcourir les composantes</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="n">amps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">fs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="n">phis</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># On ajoute la composante spectrale</span>
+    <span class="k">return</span> <span class="n">s</span>
+
+
+
+<span class="k">def</span> <span class="nf">evalue_temp</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">amps</span><span class="p">,</span> <span class="n">phis</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>  <span class="c1"># Création du vecteur temps</span>
+    <span class="k">return</span> <span class="n">ts</span><span class="p">,</span> <span class="n">fonc_temp</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">amps</span><span class="p">,</span> <span class="n">phis</span><span class="p">)</span>  <span class="c1"># Les opérations de evalue_temp sont toutes vectorialisables</span>
+
+
+<span class="k">def</span> <span class="nf">trace_spec</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">amps</span><span class="p">,</span> <span class="n">phis</span><span class="p">):</span>
+    <span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>  <span class="c1"># Création de la figure</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Spectre du signal&quot;</span><span class="p">)</span>  <span class="c1"># Titre</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;f(Hz)&quot;</span><span class="p">)</span>  <span class="c1"># Légende des x</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitude(SI)&quot;</span><span class="p">)</span>  <span class="c1"># Légende des y</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">amps</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Spectre&quot;</span><span class="p">)</span>  <span class="c1"># Tracé du spectre</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">ax</span>  <span class="c1"># On pourrait mettre plt.show() dans la fonction, on va plutôt enregistrer la figure pour l&#39;afficher plus tard</span>
+
+
+<span class="k">def</span> <span class="nf">trace_temp</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">amps</span><span class="p">,</span> <span class="n">phis</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">ts</span><span class="p">,</span> <span class="n">st</span> <span class="o">=</span> <span class="n">evalue_temp</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">amps</span><span class="p">,</span> <span class="n">phis</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>  <span class="c1"># Création de la figure</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Tracé temporel&quot;</span><span class="p">)</span>  <span class="c1"># Titre</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t(s)&quot;</span><span class="p">)</span>  <span class="c1"># Légende des x</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;s(SI)&quot;</span><span class="p">)</span>  <span class="c1"># Légende des y</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;s(t)&quot;</span><span class="p">)</span>  <span class="c1"># Tracé temporel</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">ax</span>  <span class="c1"># On pourrait mettre plt.show() dans la fonction, on va plutôt enregistrer la figure pour l&#39;afficher plus tard</span>
+
+
+<span class="sd">&quot;&quot;&quot;Cas du créneau&quot;&quot;&quot;</span>
+<span class="n">f0</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># Fondamental</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Nombre de composantes</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">f0</span>  <span class="c1"># Fréquence</span>
+<span class="n">amps</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># Amplitudes</span>
+<span class="n">phis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Phases</span>
+
+
+<span class="n">t1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">/</span> <span class="n">f0</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">f1</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">trace_spec</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">amps</span><span class="p">,</span> <span class="n">phis</span><span class="p">)</span>
+<span class="n">f2</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">trace_temp</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">amps</span><span class="p">,</span> <span class="n">phis</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="sd">&quot;&quot;&quot;Cas du triangle&quot;&quot;&quot;</span>
+<span class="n">f0</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># Fondamental</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Nombre de composantes</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">f0</span>  <span class="c1"># Fréquence</span>
+<span class="n">amps</span> <span class="o">=</span> <span class="mi">8</span> <span class="o">/</span> <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Amplitudes</span>
+<span class="n">phis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># Phases (on tient compte du (-1)^k)</span>
+
+
+<span class="n">t1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">/</span> <span class="n">f0</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">f1</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">trace_spec</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">amps</span><span class="p">,</span> <span class="n">phis</span><span class="p">)</span>
+<span class="n">f2</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">trace_temp</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">amps</span><span class="p">,</span> <span class="n">phis</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/signal_fourier_correction_4_0.png" src="_images/signal_fourier_correction_4_0.png" />
+<img alt="_images/signal_fourier_correction_4_1.png" src="_images/signal_fourier_correction_4_1.png" />
+<img alt="_images/signal_fourier_correction_4_2.png" src="_images/signal_fourier_correction_4_2.png" />
+<img alt="_images/signal_fourier_correction_4_3.png" src="_images/signal_fourier_correction_4_3.png" />
+</div>
+</div>
+</div>
+<div class="section" id="exercice-2-du-trace-temporelle-au-spectre">
+<h2><span class="section-number">1.3. </span>Exercice 2 : Du tracé temporelle au spectre<a class="headerlink" href="#exercice-2-du-trace-temporelle-au-spectre" title="Permalink to this headline">¶</a></h2>
+<p>On suppose qu’on dispose de <code class="docutils literal notranslate"><span class="pre">N</span></code> mesures d’un signal <span class="math notranslate nohighlight">\(s\)</span> faites avec une fréquence d’échantillonnage <code class="docutils literal notranslate"><span class="pre">fe</span></code>. Ces valeurs sont stockées dans un vecteur numpy <code class="docutils literal notranslate"><span class="pre">sk</span></code>. On veut obtenir la transformée de Fourier du signal <span class="math notranslate nohighlight">\(s\)</span> basé sur les mesures <code class="docutils literal notranslate"><span class="pre">sk</span></code>.</p>
+<p>Nous allons utiliser la fonction native <code class="docutils literal notranslate"><span class="pre">fft</span></code> de la bibliothèque <code class="docutils literal notranslate"><span class="pre">numpy.fft</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fft(sk)</span> <span class="pre">/</span> <span class="pre">N</span></code> permet de calculer la TF à partir de <code class="docutils literal notranslate"><span class="pre">sk</span></code> pour une liste de valeurs de fréquences discrètes <code class="docutils literal notranslate"><span class="pre">f_i</span></code>. La fonction renvoie les amplitudes sous formes de grandeurs complexes :</p>
+<ul>
+<li><p>Le module est l’amplitude de la composante spectrale</p></li>
+<li><p>son argument est la phase à l’origine du signal.</p></li>
+</ul>
+</li>
+</ul>
+<p>Les valeurs <code class="docutils literal notranslate"><span class="pre">f_i</span></code> auxquelles le spectre est évalué sont données par la liste suivante :</p>
+<div class="math notranslate nohighlight">
+\[
+[0, 1, ..., n] \times {fe \over N}
+\]</div>
+<p>Vous devez :</p>
+<blockquote>
+<div><ol class="simple">
+<li><p>Ecrire une fonction <code class="docutils literal notranslate"><span class="pre">eval_fft</span></code> qui prend comme argument un vecteur numpy <code class="docutils literal notranslate"><span class="pre">sk</span></code> et une fréquence d’échantilonnage <code class="docutils literal notranslate"><span class="pre">fr</span></code> et qui renvoie :</p>
+<ol class="simple">
+<li><p>une liste numpy contenant les fréquences <span class="math notranslate nohighlight">\(f_i\)</span></p></li>
+<li><p>une liste numpy contenant les amplitudes associées à chaque composante spectrale de la TF de <code class="docutils literal notranslate"><span class="pre">sk</span></code></p></li>
+<li><p>une liste numpy contenant les phases à l’origine associées à chaque composante spectrale de la TF de <code class="docutils literal notranslate"><span class="pre">sk</span></code></p></li>
+</ol>
+</li>
+<li><p>Créer des vecteurs de taille <span class="math notranslate nohighlight">\(N = 100\)</span> simulant la mesure (parfaite !) d’un signal (prendre à chaque fois des amplitudes égales à <span class="math notranslate nohighlight">\(1 SI\)</span>) :</p>
+<ol class="simple">
+<li><p>sinusoïdal de fréquence 2kHz (réfléchir aux choix de la fréquence d’échantillonnage) et de valeur moyenne <span class="math notranslate nohighlight">\(1 SI\)</span></p></li>
+<li><p>produit de deux sinusoïdes de fréquences 100Hz et 1kHz.</p></li>
+<li><p>créneau de fréquence 2kHz (réfléchir aux choix de la fréquence d’échantillonnage)</p></li>
+</ol>
+</li>
+<li><p>Obtenir puis tracer le spectre pour chacun des signaux précédents. Commenter ce qu’on observe. On parlera en TP de <strong>repli spectral</strong>. En pratique, on ne peut mesurer une fréquence supérieure à <span class="math notranslate nohighlight">\(f_e/2\)</span>, c’est le <strong>critère de Shannon-Nyquist</strong>. Modifier la fonction <code class="docutils literal notranslate"><span class="pre">eval_fft</span></code> pour ne renvoyer les fréquences ainsi que les amplitudes et phases que jusqu’à <span class="math notranslate nohighlight">\(f_e/2\)</span>.</p></li>
+<li><p>Reconstruire le signal à partir des spectres obtenues et les tracer. On représente sur le même graphique, le signal acquis pour comparaison avec le signal reconstruit.</p></li>
+</ol>
+</div></blockquote>
+<p><em>Données utiles</em> :</p>
+<ul class="simple">
+<li><p>Les fonctions <code class="docutils literal notranslate"><span class="pre">abs</span></code> et <code class="docutils literal notranslate"><span class="pre">angle</span></code> de la bibliothèque <code class="docutils literal notranslate"><span class="pre">numpy</span></code> permettent de calculer respectivement le module et l’argument d’un complexe et peuvent s’appliquer sur un vecteur entier.</p></li>
+<li><p>Plusieurs fonctions ont déjà été créés, ce n’est pas la peine de les réécrire.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;On importe pour vous la fonction fft&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">numpy.fft</span> <span class="kn">import</span> <span class="n">fft</span>  <span class="c1"># Avec cette méthode d&#39;importation, vous pouver utiliser directement la syntaxe fft(...)</span>
+
+
+<span class="k">def</span> <span class="nf">eval_fft</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">fe</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Taille de s pour le vecteur des fréquences</span>
+    <span class="n">freqs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">*</span> <span class="n">fe</span> <span class="o">/</span> <span class="n">N</span>  <span class="c1"># Liste de fréquence</span>
+    <span class="n">sk</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>  <span class="c1"># Calcul de la TF</span>
+    <span class="k">return</span> <span class="n">freqs</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sk</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">sk</span><span class="p">)</span>
+
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">fe</span> <span class="o">=</span> <span class="mi">10000</span>  <span class="c1"># On prend un fréquence de 10kHz pour le sinus et le signal modulé (au moins 5 points par période).</span>
+<span class="n">tk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">fe</span>
+<span class="n">s_sin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">200</span> <span class="o">*</span> <span class="n">tk</span><span class="p">)</span>  <span class="c1"># Signal sinusoïdal</span>
+<span class="n">s_mod</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">tk</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">tk</span><span class="p">)</span>  <span class="c1"># Signal produit de sinus</span>
+
+<span class="n">s_cre</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  <span class="c1"># On va devoir remplir s_cre dans une boucle à cause de la condition</span>
+<span class="n">f</span> <span class="o">=</span> <span class="mi">2000</span>  <span class="c1"># fréquence</span>
+<span class="n">fe2</span> <span class="o">=</span> <span class="mi">30000</span>  <span class="c1"># Le contenue fréquentiel d&#39;un créneau est plus important.</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">i</span> <span class="o">/</span> <span class="n">fe2</span>  <span class="c1"># temps</span>
+    <span class="n">n_per</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">f</span><span class="p">)))</span>  <span class="c1"># Nombre de demies-période entières entre 0 et t.</span>
+    <span class="k">if</span> <span class="n">n_per</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Nombre pair de demi-période</span>
+        <span class="n">s_cre</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">s_cre</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">tk2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">fe2</span>
+        
+<span class="n">freqs_sin</span><span class="p">,</span> <span class="n">amps_sin</span><span class="p">,</span> <span class="n">phis_sin</span> <span class="o">=</span> <span class="n">eval_fft</span><span class="p">(</span><span class="n">s_sin</span><span class="p">,</span> <span class="n">fe</span><span class="p">)</span>  <span class="c1"># Calcul de la TF</span>
+<span class="n">freqs_mod</span><span class="p">,</span> <span class="n">amps_mod</span><span class="p">,</span> <span class="n">phis_mod</span> <span class="o">=</span> <span class="n">eval_fft</span><span class="p">(</span><span class="n">s_mod</span><span class="p">,</span> <span class="n">fe</span><span class="p">)</span>  <span class="c1"># Calcul de la TF</span>
+<span class="n">freqs_cre</span><span class="p">,</span> <span class="n">amps_cre</span><span class="p">,</span> <span class="n">phis_cre</span> <span class="o">=</span> <span class="n">eval_fft</span><span class="p">(</span><span class="n">s_cre</span><span class="p">,</span> <span class="n">fe2</span><span class="p">)</span>  <span class="c1"># Calcul de la TF</span>
+
+<span class="n">f1</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">trace_spec</span><span class="p">(</span><span class="n">freqs_sin</span><span class="p">,</span> <span class="n">amps_sin</span><span class="p">,</span> <span class="n">phis_sin</span><span class="p">)</span>  <span class="c1"># Tracé du spectre</span>
+<span class="n">f2</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">trace_spec</span><span class="p">(</span><span class="n">freqs_mod</span><span class="p">,</span> <span class="n">amps_mod</span><span class="p">,</span> <span class="n">phis_mod</span><span class="p">)</span>  <span class="c1"># Tracé du spectre</span>
+<span class="n">f3</span><span class="p">,</span> <span class="n">ax3</span> <span class="o">=</span> <span class="n">trace_spec</span><span class="p">(</span><span class="n">freqs_cre</span><span class="p">,</span> <span class="n">amps_cre</span><span class="p">,</span> <span class="n">phis_cre</span><span class="p">)</span>  <span class="c1"># Tracé du spectre</span>
+
+<span class="n">t1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">tk</span><span class="p">)</span>
+<span class="n">t22</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">tk2</span><span class="p">)</span>
+<span class="n">f4</span><span class="p">,</span> <span class="n">ax4</span> <span class="o">=</span> <span class="n">trace_temp</span><span class="p">(</span><span class="n">freqs_sin</span><span class="p">,</span> <span class="n">amps_sin</span><span class="p">,</span> <span class="n">phis_sin</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tk</span><span class="p">,</span> <span class="n">s_sin</span><span class="p">)</span>  <span class="c1"># Pour comparaison</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">f5</span><span class="p">,</span> <span class="n">ax5</span> <span class="o">=</span> <span class="n">trace_temp</span><span class="p">(</span><span class="n">freqs_mod</span><span class="p">,</span> <span class="n">amps_mod</span><span class="p">,</span> <span class="n">phis_mod</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tk</span><span class="p">,</span> <span class="n">s_mod</span><span class="p">)</span>  <span class="c1"># Pour comparaison</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">f6</span><span class="p">,</span> <span class="n">ax6</span> <span class="o">=</span> <span class="n">trace_temp</span><span class="p">(</span><span class="n">freqs_cre</span><span class="p">,</span> <span class="n">amps_cre</span><span class="p">,</span> <span class="n">phis_cre</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t22</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tk2</span><span class="p">,</span> <span class="n">s_cre</span><span class="p">)</span>  <span class="c1"># Pour comparaison</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/signal_fourier_correction_6_0.png" src="_images/signal_fourier_correction_6_0.png" />
+<img alt="_images/signal_fourier_correction_6_1.png" src="_images/signal_fourier_correction_6_1.png" />
+<img alt="_images/signal_fourier_correction_6_2.png" src="_images/signal_fourier_correction_6_2.png" />
+<img alt="_images/signal_fourier_correction_6_3.png" src="_images/signal_fourier_correction_6_3.png" />
+<img alt="_images/signal_fourier_correction_6_4.png" src="_images/signal_fourier_correction_6_4.png" />
+<img alt="_images/signal_fourier_correction_6_5.png" src="_images/signal_fourier_correction_6_5.png" />
+</div>
+</div>
+<p><strong>Il est important de conserver votre travail et de mettre au propre les fonctions que vous avez créées, nous les utiliserons pour d’autre TD sur les capacités numériques plus tard.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Version corrigé pour ne prendre que les fréquences jusqu&#39;à fe/2</span>
+<span class="sd">On doit par contre multiplier par 2 les amplitudes.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;On importe pour vous la fonction fft&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">eval_fft</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">fe</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Taille de s pour le vecteur des fréquences</span>
+    <span class="n">freqs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">N</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="n">fe</span> <span class="o">/</span> <span class="n">N</span>  <span class="c1"># Liste de fréquence</span>
+    <span class="n">sk</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>  <span class="c1"># Calcul de la TF</span>
+    <span class="k">return</span> <span class="n">freqs</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sk</span><span class="p">)[:</span><span class="nb">int</span><span class="p">(</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">sk</span><span class="p">)[:</span><span class="nb">int</span><span class="p">(</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>  <span class="c1"># Remarquez la multiplication par 2</span>
+
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">fe</span> <span class="o">=</span> <span class="mi">10000</span>  <span class="c1"># On prend un fréquence de 10kHz pour le sinus et le signal modulé (au moins 5 points par période).</span>
+<span class="n">tk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">fe</span>
+<span class="n">s_sin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">200</span> <span class="o">*</span> <span class="n">tk</span><span class="p">)</span>  <span class="c1"># Signal sinusoïdal</span>
+<span class="n">s_mod</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">tk</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">tk</span><span class="p">)</span>  <span class="c1"># Signal produit de sinus</span>
+
+<span class="n">s_cre</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  <span class="c1"># On va devoir remplir s_cre dans une boucle à cause de la condition</span>
+<span class="n">f</span> <span class="o">=</span> <span class="mi">2000</span>  <span class="c1"># fréquence</span>
+<span class="n">fe2</span> <span class="o">=</span> <span class="mi">30000</span>  <span class="c1"># Le contenue fréquentiel d&#39;un créneau est plus important.</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">i</span> <span class="o">/</span> <span class="n">fe2</span>  <span class="c1"># temps</span>
+    <span class="n">n_per</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">f</span><span class="p">)))</span>  <span class="c1"># Nombre de demies-période entières entre 0 et t.</span>
+    <span class="k">if</span> <span class="n">n_per</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Nombre pair de demi-période</span>
+        <span class="n">s_cre</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">s_cre</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">tk2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">fe2</span>
+        
+<span class="n">freqs_sin</span><span class="p">,</span> <span class="n">amps_sin</span><span class="p">,</span> <span class="n">phis_sin</span> <span class="o">=</span> <span class="n">eval_fft</span><span class="p">(</span><span class="n">s_sin</span><span class="p">,</span> <span class="n">fe</span><span class="p">)</span>  <span class="c1"># Calcul de la TF</span>
+<span class="n">freqs_mod</span><span class="p">,</span> <span class="n">amps_mod</span><span class="p">,</span> <span class="n">phis_mod</span> <span class="o">=</span> <span class="n">eval_fft</span><span class="p">(</span><span class="n">s_mod</span><span class="p">,</span> <span class="n">fe</span><span class="p">)</span>  <span class="c1"># Calcul de la TF</span>
+<span class="n">freqs_cre</span><span class="p">,</span> <span class="n">amps_cre</span><span class="p">,</span> <span class="n">phis_cre</span> <span class="o">=</span> <span class="n">eval_fft</span><span class="p">(</span><span class="n">s_cre</span><span class="p">,</span> <span class="n">fe2</span><span class="p">)</span>  <span class="c1"># Calcul de la TF</span>
+
+<span class="n">f1</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">trace_spec</span><span class="p">(</span><span class="n">freqs_sin</span><span class="p">,</span> <span class="n">amps_sin</span><span class="p">,</span> <span class="n">phis_sin</span><span class="p">)</span>  <span class="c1"># Tracé du spectre</span>
+<span class="n">f2</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">trace_spec</span><span class="p">(</span><span class="n">freqs_mod</span><span class="p">,</span> <span class="n">amps_mod</span><span class="p">,</span> <span class="n">phis_mod</span><span class="p">)</span>  <span class="c1"># Tracé du spectre</span>
+<span class="n">f3</span><span class="p">,</span> <span class="n">ax3</span> <span class="o">=</span> <span class="n">trace_spec</span><span class="p">(</span><span class="n">freqs_cre</span><span class="p">,</span> <span class="n">amps_cre</span><span class="p">,</span> <span class="n">phis_cre</span><span class="p">)</span>  <span class="c1"># Tracé du spectre</span>
+
+<span class="n">t1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">tk</span><span class="p">)</span>
+<span class="n">t22</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">tk2</span><span class="p">)</span>
+<span class="n">f4</span><span class="p">,</span> <span class="n">ax4</span> <span class="o">=</span> <span class="n">trace_temp</span><span class="p">(</span><span class="n">freqs_sin</span><span class="p">,</span> <span class="n">amps_sin</span><span class="p">,</span> <span class="n">phis_sin</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tk</span><span class="p">,</span> <span class="n">s_sin</span><span class="p">)</span>  <span class="c1"># Pour comparaison</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">f5</span><span class="p">,</span> <span class="n">ax5</span> <span class="o">=</span> <span class="n">trace_temp</span><span class="p">(</span><span class="n">freqs_mod</span><span class="p">,</span> <span class="n">amps_mod</span><span class="p">,</span> <span class="n">phis_mod</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tk</span><span class="p">,</span> <span class="n">s_mod</span><span class="p">)</span>  <span class="c1"># Pour comparaison</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">f6</span><span class="p">,</span> <span class="n">ax6</span> <span class="o">=</span> <span class="n">trace_temp</span><span class="p">(</span><span class="n">freqs_cre</span><span class="p">,</span> <span class="n">amps_cre</span><span class="p">,</span> <span class="n">phis_cre</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t22</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tk2</span><span class="p">,</span> <span class="n">s_cre</span><span class="p">)</span>  <span class="c1"># Pour comparaison</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/signal_fourier_correction_8_0.png" src="_images/signal_fourier_correction_8_0.png" />
+<img alt="_images/signal_fourier_correction_8_1.png" src="_images/signal_fourier_correction_8_1.png" />
+<img alt="_images/signal_fourier_correction_8_2.png" src="_images/signal_fourier_correction_8_2.png" />
+<img alt="_images/signal_fourier_correction_8_3.png" src="_images/signal_fourier_correction_8_3.png" />
+<img alt="_images/signal_fourier_correction_8_4.png" src="_images/signal_fourier_correction_8_4.png" />
+<img alt="_images/signal_fourier_correction_8_5.png" src="_images/signal_fourier_correction_8_5.png" />
+</div>
+</div>
+<p>On remarque un problème avec le créneau. C’est parce que des fréquences supérieures à <span class="math notranslate nohighlight">\(f_e /2\)</span> existent et ont été repliées. On observe ainsi une fréquence à 12kHz qui ne devrait pas exister (<span class="math notranslate nohighlight">\(f_{repli} = f_e - f_n = 12kHz\)</span> pour la composante <span class="math notranslate nohighlight">\(f_n = 16kHz\)</span>).</p>
+<p>Le problème est que dans le cas du créneaux, l’amplitude des composantes spectrales diminue lentement : les cinquième composante <span class="math notranslate nohighlight">\(f_n = 16kHz\)</span>) est encore non négligeable. Son “repli” (<span class="math notranslate nohighlight">\(f_{repli} = 12kHz\)</span>) modifie le spectre du créneau, d’où la reconstruction fausse.</p>
+<div class="section" id="quelques-explications-sur-le-repli-spectral">
+<h3><span class="section-number">1.3.1. </span>Quelques explications sur le repli spectral.<a class="headerlink" href="#quelques-explications-sur-le-repli-spectral" title="Permalink to this headline">¶</a></h3>
+<p>On rappelle que le signal acquis est échantillonné à une fréquence <span class="math notranslate nohighlight">\(f_e\)</span>. On a donc uniquement accès à une série de points de mesures <span class="math notranslate nohighlight">\((t_k, s_k)\)</span>. On donne la représentation de ces points (simulation!) ci-dessous pour un signal sinusoïdal de 200Hz.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fe</span> <span class="o">=</span> <span class="mi">2000</span>  <span class="c1"># Fréquence d&#39;échantillonnage de 2kHz</span>
+<span class="n">Te</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">fe</span>  <span class="c1"># Période d&#39;échantillonnage</span>
+<span class="n">fsig</span> <span class="o">=</span> <span class="mi">200</span>  <span class="c1"># Fréquence du signal</span>
+<span class="n">Tsig</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">fsig</span>  <span class="c1"># Période du signal</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">Tsig</span><span class="p">,</span> <span class="n">Te</span><span class="p">)</span>  <span class="c1"># Temps des points de mesure</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">fsig</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>  <span class="c1"># Valeur acquises pour le signal</span>
+
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">f</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Points de mesures acquis&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t(s)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;s(SI)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mesures&quot;</span><span class="p">)</span>  <span class="c1"># On ne relie pas les points pour bien montrer où sont les mesures.</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/signal_fourier_correction_11_0.png" src="_images/signal_fourier_correction_11_0.png" />
+</div>
+</div>
+<p>On reconnaît bien l’allure d’un sinusoïde et si l’on essaie de mesurer sa période, on trouve bien <span class="math notranslate nohighlight">\(T = 5\times10^{-3} s\)</span>.</p>
+<p>MAIS, c’est point pourrait correspondre aussi <strong>à un autre signal sinusoïdal</strong> : un signal de fréquence <span class="math notranslate nohighlight">\(f_r = f_e - f_{sig} = 1800Hz\)</span> mais de phase à l’origine égale à <span class="math notranslate nohighlight">\(\pi\)</span> (ce qui revient à multiplier le signal par <span class="math notranslate nohighlight">\(-1\)</span>).</p>
+<p>Pour s’en convaindre, on va tracer un tel signal avec les points de mesures.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fr</span> <span class="o">=</span> <span class="mi">1800</span>
+<span class="n">Tr</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">fr</span>
+<span class="n">sr</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">fr</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>  <span class="c1"># Multiplication par -1</span>
+
+
+
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">f</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Points de mesures acquis&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t(s)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;s(SI)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sr</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Signal rapide&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mesures&quot;</span><span class="p">)</span>  <span class="c1"># On ne relie pas les points pour bien montrer où sont les mesures.</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/signal_fourier_correction_13_0.png" src="_images/signal_fourier_correction_13_0.png" />
+</div>
+</div>
+<p>Les points coïncident ! Pour bien se rendre compte que les points bleus correspondent à un signal de 1800Hz, on va retracer ce signal mais une fréquence d’échantillonnage beaucoup plus grande pour bien voir les variations rapides.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">Tsig</span><span class="p">,</span> <span class="n">Te</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># 1000 fois plus de points</span>
+<span class="n">sr2</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">fr</span> <span class="o">*</span> <span class="n">t2</span><span class="p">)</span>  <span class="c1"># Multiplication par -1</span>
+
+
+
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">f</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Points de mesures acquis&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t(s)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;s(SI)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="n">sr2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Signal rapide&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mesures&quot;</span><span class="p">)</span>  <span class="c1"># On ne relie pas les points pour bien montrer où sont les mesures.</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/signal_fourier_correction_15_0.png" src="_images/signal_fourier_correction_15_0.png" />
+</div>
+</div>
+<p>Le signal passent effectivement par les points de mesures, il est donc compatible avec ces points. Quand le fonction <code class="docutils literal notranslate"><span class="pre">fft</span></code> calcule les fréquences du spectre du signal <span class="math notranslate nohighlight">\((t_k, s_k)\)</span> pour des fréquences entre 0 et <span class="math notranslate nohighlight">\(f_e\)</span>, il trouve donc normalement <strong>deux fréquences</strong> : <span class="math notranslate nohighlight">\(f_{sig}\)</span> et <span class="math notranslate nohighlight">\(f_{repli}\)</span>.</p>
+<p><em>C’est pourquoi on n’étudie que les fréquences inférieures à <span class="math notranslate nohighlight">\(f_e / 2\)</span>.<br />
+MAIS le problème du repli spectral apparaît quand des fréquences du signal sont supérieure à <span class="math notranslate nohighlight">\(f_e / 2\)</span> qui font apparaître des fréquences repliées inférieures.</em></p>
+</div>
+<div class="section" id="solution-le-critere-de-shannon-nyquist">
+<h3><span class="section-number">1.3.2. </span>SOLUTION : Le critère de Shannon-Nyquist<a class="headerlink" href="#solution-le-critere-de-shannon-nyquist" title="Permalink to this headline">¶</a></h3>
+<p><strong>Lorsqu’on analyse un signal dont le contenu spectral va jusqu’à une fréquence <span class="math notranslate nohighlight">\(f_{max}\)</span>, on doit échantillonner le signal à une fréquence <span class="math notranslate nohighlight">\(f_e\)</span> telle que <span class="math notranslate nohighlight">\(f_e / 2 &gt; f_{max}\)</span>.</strong></p>
+<p>Exemple :  Dans le cas du signal créneau, la fréquence maximale est évidemment infinie mais on a vu qu’on pouvait se contenter des 10 premières composantes, soit pour un signal de 2kHz, une fréquence maximale de <span class="math notranslate nohighlight">\(38kHz\)</span> (on prendra 40kHz$ pour avoir une marge). Soit une fréquence d’échantillonnage de 80kHz.</p>
+<p>On refait une simulation ci-dessous pour le créneau en prenant une fréquence d’échantillonnage de 80kHz.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="mi">2000</span>  <span class="c1"># fréquence du créneau</span>
+<span class="n">fe2</span> <span class="o">=</span> <span class="mi">80000</span>  <span class="c1"># Fréquence d&#39;échantillonnage</span>
+<span class="n">Tobs</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">/</span> <span class="n">f</span>  <span class="c1"># Temps d&#39;observation : 3 périodes</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fe2</span> <span class="o">*</span> <span class="n">Tobs</span><span class="p">)</span>  <span class="c1"># Nombre de points de mesure</span>
+
+<span class="n">s_cre</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  <span class="c1"># On va devoir remplir s_cre dans une boucle à cause de la condition</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">i</span> <span class="o">/</span> <span class="n">fe2</span>  <span class="c1"># temps</span>
+    <span class="n">n_per</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">f</span><span class="p">)))</span>  <span class="c1"># Nombre de demies-période entières entre 0 et t.</span>
+    <span class="k">if</span> <span class="n">n_per</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Nombre pair de demi-période</span>
+        <span class="n">s_cre</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">s_cre</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">tk2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">fe2</span>
+        
+<span class="n">freqs_cre</span><span class="p">,</span> <span class="n">amps_cre</span><span class="p">,</span> <span class="n">phis_cre</span> <span class="o">=</span> <span class="n">eval_fft</span><span class="p">(</span><span class="n">s_cre</span><span class="p">,</span> <span class="n">fe2</span><span class="p">)</span>  <span class="c1"># Calcul de la TF</span>
+
+<span class="n">f3</span><span class="p">,</span> <span class="n">ax3</span> <span class="o">=</span> <span class="n">trace_spec</span><span class="p">(</span><span class="n">freqs_cre</span><span class="p">,</span> <span class="n">amps_cre</span><span class="p">,</span> <span class="n">phis_cre</span><span class="p">)</span>  <span class="c1"># Tracé du spectre</span>
+
+<span class="n">t1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">t22</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">tk2</span><span class="p">)</span>
+<span class="n">f6</span><span class="p">,</span> <span class="n">ax6</span> <span class="o">=</span> <span class="n">trace_temp</span><span class="p">(</span><span class="n">freqs_cre</span><span class="p">,</span> <span class="n">amps_cre</span><span class="p">,</span> <span class="n">phis_cre</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t22</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tk2</span><span class="p">,</span> <span class="n">s_cre</span><span class="p">)</span>  <span class="c1"># Pour comparaison</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/signal_fourier_correction_17_0.png" src="_images/signal_fourier_correction_17_0.png" />
+<img alt="_images/signal_fourier_correction_17_1.png" src="_images/signal_fourier_correction_17_1.png" />
+</div>
+</div>
+<p>Cette fois le repi spectral ne pose pas de problème car les fréquences repliées sont d’amplitude négligeable.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="capacite_numerique_c.html" title="previous page">Capacités numériques en physique</a>
+    <a class='right-next' id="next-link" href="elec_reponse_o1_correction.html" title="next page"><span class="section-number">2. </span>Résolution numérique d’une équation différentielle d’ordre 1</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By C. Lacpatia<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

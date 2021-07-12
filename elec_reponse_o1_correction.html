@@ -1,0 +1,921 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2. Résolution numérique d’une équation différentielle d’ordre 1 &#8212; Capacités numériques - Corrigés</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://pcsi3physiquestan.github.io/capacite_numerique_c/elec_reponse_o1_correction.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Etude numérique d’un filtre linéaire" href="elec_filtrage_correction.html" />
+    <link rel="prev" title="1. Analyse spectrale d’un signal" href="signal_fourier_correction.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://pcsi3physiquestan.github.io/capacite_numerique_c/elec_reponse_o1_correction.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Résolution numérique d’une équation différentielle d’ordre 1" />
+<meta property="og:description" content="Résolution numérique d’une équation différentielle d’ordre 1  But : mettre en œuvre la méthode d’Euler à l’aide d’un langage de programmation pour simuler la ré" />
+
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Capacités numériques - Corrigés</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="capacite_numerique_c.html">
+   Capacités numériques en physique
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="signal_fourier_correction.html">
+   1. Analyse spectrale d’un signal
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   2. Résolution numérique d’une équation différentielle d’ordre 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="elec_filtrage_correction.html">
+   3. Etude numérique d’un filtre linéaire
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="meca_non_lineaire_correction.html">
+   4. Système conservatif : Effets non linéaires.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="meca_pendule_correction.html">
+   5. Etude d’un pendule simple
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="meca_force_centrale_correction.html">
+   6. Etude d’un mouvement à force centrale
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="thermo_statique_correction.html">
+   7. Etude de l’atmosphère terrestre
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <a href="https://www.cedriclacpatia.fr">Site de la classe</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="_sources/elec_reponse_o1_correction.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/elec_reponse_o1_correction.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/elec_reponse_o1_correction.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rappels-sur-la-methode-d-euler">
+   2.1. Rappels sur la méthode d’Euler
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#position-du-probleme">
+     2.1.1. Position du problème.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#schema-d-integration-d-euler-explicite">
+     2.1.2. Schéma d’intégration d’Euler explicite
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#application-en-electrocinetique">
+   2.2. Application en électrocinétique.
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementation-du-schema-d-euler-explicite">
+     2.2.1. Implémentation du schéma d’Euler explicite
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#application-au-regime-libre-et-a-l-echelon-de-tension">
+     2.2.2. Application au régime libre et à l’échelon de tension.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#erreur-et-pas-d-integration">
+     2.2.3. Erreur et pas d’intégration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rampe-de-tension">
+     2.2.4. Rampe de tension
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#derivation-numerique">
+       2.2.4.1. Dérivation numérique.
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#integration-numerique">
+       2.2.4.2. Intégration numérique.
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#application-a-la-rampe">
+       2.2.4.3. Application à la rampe.
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="resolution-numerique-d-une-equation-differentielle-d-ordre-1">
+<h1><span class="section-number">2. </span>Résolution numérique d’une équation différentielle d’ordre 1<a class="headerlink" href="#resolution-numerique-d-une-equation-differentielle-d-ordre-1" title="Permalink to this headline">¶</a></h1>
+<p><strong>But :</strong> mettre en œuvre la méthode d’Euler à l’aide d’un langage de programmation pour simuler la réponse d’un système linéaire du premier ordre à une excitation de forme quelconque.</p>
+<div class="section" id="rappels-sur-la-methode-d-euler">
+<h2><span class="section-number">2.1. </span>Rappels sur la méthode d’Euler<a class="headerlink" href="#rappels-sur-la-methode-d-euler" title="Permalink to this headline">¶</a></h2>
+<p>La <em>méthode d’Euler</em> est une méthode numérique d’intégration d’une équation différentielle.</p>
+<div class="section" id="position-du-probleme">
+<h3><span class="section-number">2.1.1. </span>Position du problème.<a class="headerlink" href="#position-du-probleme" title="Permalink to this headline">¶</a></h3>
+<p>Un équation différentielle d’ordre 1 peut se mettre sous la forme :</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\rm{d}y}{\rm{dt}}(t) = f(t, y)
+\]</div>
+<p>avec <span class="math notranslate nohighlight">\(y(t_0) = y_0\)</span></p>
+<p>où <span class="math notranslate nohighlight">\(y\)</span> est la fonction inconnue.</p>
+<blockquote>
+<div><p>Exemple : Pour un circuit RC série relié à une tension de tension <span class="math notranslate nohighlight">\(E(t)\)</span>, l’équation d’évolution est :</p>
+<div class="math notranslate nohighlight">
+\[\frac{\rm{d}u}{\rm{dt}} = \frac{1}{RC}\left (E(t) - u(t) \right )\]</div>
+<p>La fonction <span class="math notranslate nohighlight">\(f\)</span> est donc :</p>
+<div class="math notranslate nohighlight">
+\[f(t, u) = \frac{1}{RC}\left (E(t) - u(t) \right )\]</div>
+</div></blockquote>
+</div>
+<div class="section" id="schema-d-integration-d-euler-explicite">
+<h3><span class="section-number">2.1.2. </span>Schéma d’intégration d’Euler explicite<a class="headerlink" href="#schema-d-integration-d-euler-explicite" title="Permalink to this headline">¶</a></h3>
+<p>La méthode d’Euler consiste à approximer la dérivée par par un taux de variation fini calculé pour un pas de temps <span class="math notranslate nohighlight">\(h\)</span> choisi :</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\rm{d}y}{\rm{dt}} \approx \frac{y(t + h) - y(t)}{h}
+\]</div>
+<p>(on parle d’approximation à l’ordre 1.)</p>
+<p>On peut ainsi déterminer la valeur de la fonction <span class="math notranslate nohighlight">\(y(t + h)\)</span> à partir de <span class="math notranslate nohighlight">\(f\)</span> et de la valeur de la fonction à l’instant <span class="math notranslate nohighlight">\(t\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[
+y(t + h) = y(t) + h \times f(t, y(t))
+\]</div>
+<p>On ne va donc pas calculer la fonction <span class="math notranslate nohighlight">\(y(t)\)</span> pour tout instant <span class="math notranslate nohighlight">\(t\)</span> mais une suite de valeurs <span class="math notranslate nohighlight">\(y_k\)</span> aux instants <span class="math notranslate nohighlight">\(t_k = t_0 + k\times h\)</span> avec <span class="math notranslate nohighlight">\(k\)</span> entier. On obtient une suite <span class="math notranslate nohighlight">\((y_k)\)</span> définie par la récurrence :</p>
+<div class="math notranslate nohighlight">
+\[
+y_{k+1} = y_k + h \times f(t, y_k)
+\]</div>
+</div>
+</div>
+<div class="section" id="application-en-electrocinetique">
+<h2><span class="section-number">2.2. </span>Application en électrocinétique.<a class="headerlink" href="#application-en-electrocinetique" title="Permalink to this headline">¶</a></h2>
+<p>On traite le cas général d’un système d’ordre 1 stable de constante de temps <span class="math notranslate nohighlight">\(\tau\)</span>. On va notamment étudier la réponse à plusieurs réponses :</p>
+<ul class="simple">
+<li><p>un régime libre et un échelon de tension. On comparera avec la réponse attendue pour tester l’intégration numérique.</p></li>
+<li><p>une rampe de tension suivie d’une tension constante.</p></li>
+</ul>
+<p>On étudiera l’influence du pas d’intégration sur la fiabilité de l’intégration numérique.</p>
+<div class="section" id="implementation-du-schema-d-euler-explicite">
+<h3><span class="section-number">2.2.1. </span>Implémentation du schéma d’Euler explicite<a class="headerlink" href="#implementation-du-schema-d-euler-explicite" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>Exercice 1</strong></p>
+<ol class="simple">
+<li><p>Commencer par importer les bibliothèques scientifiques utiles : numpy, matplotlib.pyplot</p></li>
+<li><p>Ecrire une fonction <code class="docutils literal notranslate"><span class="pre">euler</span></code> qui prend en arguments :</p>
+<ul class="simple">
+<li><p>une variable <code class="docutils literal notranslate"><span class="pre">f</span></code> qui sera une fonction</p></li>
+<li><p>un flottant <code class="docutils literal notranslate"><span class="pre">pas</span></code> qui sera le pas <code class="docutils literal notranslate"><span class="pre">h</span></code> d’intégration</p></li>
+<li><p>deux flottants <code class="docutils literal notranslate"><span class="pre">t1</span></code> et <code class="docutils literal notranslate"><span class="pre">t2</span></code> donnant les temps initiaux et finaux de l’intervalle sur lesquels on va intégrer le signal (Note : <code class="docutils literal notranslate"><span class="pre">t2</span></code> ne sera pas forcément atteint)</p></li>
+<li><p>un flottant <code class="docutils literal notranslate"><span class="pre">y1</span></code> donnant la valeur de <span class="math notranslate nohighlight">\(y(t)\)</span> à l’instant <code class="docutils literal notranslate"><span class="pre">t1</span></code>
+et qui renvoie deux vecteurs numpy : le premier contient les temps <span class="math notranslate nohighlight">\(t_k\)</span> où on a évaluer la fonction (on commence à <code class="docutils literal notranslate"><span class="pre">t1</span></code>) et le second contient les valeurs estimées de <span class="math notranslate nohighlight">\(y\)</span> (<span class="math notranslate nohighlight">\(y_k\)</span>).</p></li>
+</ul>
+</li>
+</ol>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Ne pas oublier d&#39;importer les bibliothèques scientifiques&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">euler</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">pas</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">y1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Implémentation du schéma d&#39;Euler explicite entre t1 et t2 pour une fonction f</span>
+<span class="sd">    et un pas donné.</span>
+<span class="sd">    y1 est la condition initiale à t1</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">t2</span> <span class="o">-</span> <span class="n">t1</span><span class="p">)</span> <span class="o">/</span> <span class="n">pas</span><span class="p">)</span>  <span class="c1"># Nombre d&#39;itérations à réaliser.</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  <span class="c1"># Initialisation du vecteur temps</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  <span class="c1"># Initialisation du vecteur y</span>
+    <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">t1</span>  <span class="c1"># Condition intiale</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y1</span>  <span class="c1"># Condition initiale</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>  <span class="c1"># On commence à la boucle à 1 car le premier terme est déjà rempli</span>
+        <span class="n">dy</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">pas</span>  <span class="c1"># Calcul du temps suivant</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">pas</span> <span class="o">*</span> <span class="n">dy</span>  <span class="c1"># Calcul de la valeur suivante de y</span>
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Remarque : On pourrait aussi utiliser une boucle while mais il serait alors préférable</span>
+<span class="sd">de créer deux listes t et y qu&#39;on transformerait à la fin de la fonction en vecteur.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;\nRemarque : On pourrait aussi utiliser une boucle while mais il serait alors préférable\nde créer deux listes t et y qu&#39;on transformerait à la fin de la fonction en vecteur.\n&quot;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="application-au-regime-libre-et-a-l-echelon-de-tension">
+<h3><span class="section-number">2.2.2. </span>Application au régime libre et à l’échelon de tension.<a class="headerlink" href="#application-au-regime-libre-et-a-l-echelon-de-tension" title="Permalink to this headline">¶</a></h3>
+<p><strong>On prendra <span class="math notranslate nohighlight">\(\tau = 1\)</span>.</strong></p>
+<blockquote>
+<div><p><strong>Exercice 2</strong></p>
+<ol class="simple">
+<li><p>Préciser l’expression de la fonction <span class="math notranslate nohighlight">\(f(t, y)\)</span>  dans le cas d’un régime libre et d’un échelon de tension (<span class="math notranslate nohighlight">\(E = 1V\)</span>) puis implémenter deux fonctions <code class="docutils literal notranslate"><span class="pre">libre</span></code> et <code class="docutils literal notranslate"><span class="pre">echelon</span></code> correspondant à ces fonctions (mettre les arguments <code class="docutils literal notranslate"><span class="pre">t</span></code> et <code class="docutils literal notranslate"><span class="pre">y</span></code> même s’ils n’interviennent pas dans la fonction).</p></li>
+<li><p>Définir deux fonctions <code class="docutils literal notranslate"><span class="pre">sol_libre</span></code> et <code class="docutils literal notranslate"><span class="pre">sol_echelon</span></code> qui prennent comme argument <code class="docutils literal notranslate"><span class="pre">t</span></code>, <code class="docutils literal notranslate"><span class="pre">t1</span></code> et <code class="docutils literal notranslate"><span class="pre">y0</span></code> et qui renvoient respectivement les solutions pour un régime libre puis pour un échelon de tension avec comme condition initiale <span class="math notranslate nohighlight">\(y(t1) = y0\)</span> au temps <code class="docutils literal notranslate"><span class="pre">t</span></code>. Ces fonctions devront être vectorialisables par rapport à <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p></li>
+<li><p>Utiliser le schéma d’Euler que vous avez implémenté pour résoudre numériquement le cas d’un régime libre et d’un échelon de tension. Choisir un pas d’intégration <span class="math notranslate nohighlight">\(pas = \frac{1}{1000} \tau\)</span></p></li>
+<li><p>Tracer sur le même graphique la réponse numérique et la réponse analytique pour un régime libre puis pour un échelon de tension.</p></li>
+</ol>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tau</span> <span class="o">=</span> <span class="mi">1</span>
+
+
+<span class="k">def</span> <span class="nf">f_libre</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>  <span class="c1"># Régime libre, fonction f</span>
+    <span class="k">return</span> <span class="o">-</span> <span class="n">y</span> <span class="o">/</span> <span class="n">tau</span>
+
+
+<span class="k">def</span> <span class="nf">f_echelon</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>  <span class="c1"># Echelon, fonction f</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span>
+
+
+<span class="k">def</span> <span class="nf">sol_libre</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">y0</span><span class="p">):</span>  <span class="c1"># Régime libre, solution analytique</span>
+    <span class="k">return</span> <span class="n">y0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t1</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">sol_echelon</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">y0</span><span class="p">):</span>  <span class="c1"># Echelon, solution analytique</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">y0</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t1</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+<span class="n">pas</span> <span class="o">=</span> <span class="n">tau</span> <span class="o">/</span> <span class="mi">1000</span>  <span class="c1"># pas d&#39;intégration</span>
+
+<span class="n">t_libre</span><span class="p">,</span> <span class="n">num_libre</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">f_libre</span><span class="p">,</span> <span class="n">pas</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">tau</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Intégration numérique du régime libre</span>
+<span class="n">ana_libre</span> <span class="o">=</span> <span class="n">sol_libre</span><span class="p">(</span><span class="n">t_libre</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Solution analytique du régime libre</span>
+
+<span class="n">fl</span><span class="p">,</span> <span class="n">axl</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>  <span class="c1"># Création de la fenêtre et des axes</span>
+<span class="n">fl</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Régime libre&#39;</span><span class="p">)</span>  <span class="c1"># Titre</span>
+<span class="n">axl</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t (s)&#39;</span><span class="p">)</span>  <span class="c1"># Légende des abscisses</span>
+<span class="n">axl</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;u(t) (V)&#39;</span><span class="p">)</span>  <span class="c1"># Légende des ordonnées</span>
+
+<span class="n">axl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_libre</span><span class="p">,</span> <span class="n">num_libre</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>  <span class="c1"># Tracé de la solution numérique</span>
+<span class="n">axl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_libre</span><span class="p">,</span> <span class="n">ana_libre</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Analytique&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>  <span class="c1"># Tracé de la solution analytique</span>
+<span class="n">axl</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axl</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">t_echelon</span><span class="p">,</span> <span class="n">num_echelon</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">f_echelon</span><span class="p">,</span> <span class="n">pas</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">tau</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Intégration numérique du régime echelon</span>
+<span class="n">ana_echelon</span> <span class="o">=</span> <span class="n">sol_echelon</span><span class="p">(</span><span class="n">t_echelon</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Solution analytique du régime echelon</span>
+
+<span class="n">fl</span><span class="p">,</span> <span class="n">axe</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>  <span class="c1"># Création de la fenêtre et des axes</span>
+<span class="n">fl</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Régime echelon&#39;</span><span class="p">)</span>  <span class="c1"># Titre</span>
+<span class="n">axe</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t (s)&#39;</span><span class="p">)</span>  <span class="c1"># Légende des abscisses</span>
+<span class="n">axe</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;u(t) (V)&#39;</span><span class="p">)</span>  <span class="c1"># Légende des ordonnées</span>
+
+<span class="n">axe</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_echelon</span><span class="p">,</span> <span class="n">num_echelon</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>  <span class="c1"># Tracé de la solution numérique</span>
+<span class="n">axe</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_echelon</span><span class="p">,</span> <span class="n">ana_echelon</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Analytique&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>  <span class="c1"># Tracé de la solution analytique</span>
+<span class="n">axe</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axe</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/elec_reponse_o1_correction_3_0.png" src="_images/elec_reponse_o1_correction_3_0.png" />
+<img alt="_images/elec_reponse_o1_correction_3_1.png" src="_images/elec_reponse_o1_correction_3_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="erreur-et-pas-d-integration">
+<h3><span class="section-number">2.2.3. </span>Erreur et pas d’intégration<a class="headerlink" href="#erreur-et-pas-d-integration" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>Exercice 3</strong></p>
+<ol class="simple">
+<li><p>Reprendre l’exercice précédent mais en affichant deux graphiques (1 colonne et deux lignes) : les solutions analytique et numérique précédentes sur le premier et la valeur absolue des écarts entre les deux solutions sur le second graphique.</p></li>
+<li><p>Etudier l’évolution des erreurs en fonction du pas d’intégration (commencer par un pas égal à <span class="math notranslate nohighlight">\(\tau\)</span> puis diviser successivement par 5 le pas) et pour un pas d’intégration fixé en fonction du temps.</p></li>
+</ol>
+</div></blockquote>
+<p>Pour vous aider sur la manière de tracer une fenêtre multi-graphique, utiliser cet <a class="reference external" href="https://pcsi3physiquestan.github.io/intro_python/notebook/plus_loin.html">élément de cours</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lpas</span> <span class="o">=</span> <span class="p">[</span><span class="n">tau</span><span class="p">,</span> <span class="n">tau</span> <span class="o">/</span> <span class="mi">5</span><span class="p">,</span> <span class="n">tau</span> <span class="o">/</span> <span class="mi">25</span><span class="p">,</span> <span class="n">tau</span> <span class="o">/</span> <span class="mi">125</span><span class="p">]</span>
+
+
+<span class="n">fl</span><span class="p">,</span> <span class="n">axl</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>  <span class="c1"># Création de la fenêtre et des axes</span>
+<span class="n">fl</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Régime libre&#39;</span><span class="p">)</span>  <span class="c1"># Titre</span>
+<span class="n">axl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t (s)&#39;</span><span class="p">)</span>  <span class="c1"># Légende des abscisses</span>
+<span class="n">axl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;u(t) (V)&#39;</span><span class="p">)</span>  <span class="c1"># Légende des ordonnées</span>
+
+<span class="n">fl</span><span class="p">,</span> <span class="n">axe</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>  <span class="c1"># Création de la fenêtre et des axes</span>
+<span class="n">fl</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Régime echelon&#39;</span><span class="p">)</span>  <span class="c1"># Titre</span>
+<span class="n">axe</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t (s)&#39;</span><span class="p">)</span>  <span class="c1"># Légende des abscisses</span>
+<span class="n">axe</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;u(t) (V)&#39;</span><span class="p">)</span>  <span class="c1"># Légende des ordonnées</span>
+
+
+<span class="k">for</span> <span class="n">pas</span> <span class="ow">in</span> <span class="n">lpas</span><span class="p">:</span>
+    <span class="n">t_libre</span><span class="p">,</span> <span class="n">num_libre</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">f_libre</span><span class="p">,</span> <span class="n">pas</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">tau</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Intégration numérique du régime libre</span>
+    <span class="n">ana_libre</span> <span class="o">=</span> <span class="n">sol_libre</span><span class="p">(</span><span class="n">t_libre</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Solution analytique du régime libre</span>
+
+    <span class="n">axl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_libre</span><span class="p">,</span> <span class="n">num_libre</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler (</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pas</span><span class="p">))</span>  <span class="c1"># Tracé de la solution numérique</span>
+    <span class="n">axl</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_libre</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">num_libre</span> <span class="o">-</span> <span class="n">ana_libre</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler (</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pas</span><span class="p">))</span>  <span class="c1"># Tracé des écarts</span>
+
+    <span class="n">t_echelon</span><span class="p">,</span> <span class="n">num_echelon</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">f_echelon</span><span class="p">,</span> <span class="n">pas</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">tau</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Intégration numérique du régime echelon</span>
+    <span class="n">ana_echelon</span> <span class="o">=</span> <span class="n">sol_echelon</span><span class="p">(</span><span class="n">t_echelon</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Solution analytique du régime echelon</span>
+
+
+    <span class="n">axe</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_echelon</span><span class="p">,</span> <span class="n">num_echelon</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler (</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pas</span><span class="p">))</span>  <span class="c1"># Tracé de la solution numérique</span>
+    <span class="n">axe</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_libre</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">num_echelon</span> <span class="o">-</span> <span class="n">ana_echelon</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler (</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pas</span><span class="p">))</span>  <span class="c1"># Tracé des écarts</span>
+
+<span class="n">axl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_libre</span><span class="p">,</span> <span class="n">ana_libre</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Analytique&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>  <span class="c1"># Tracé de la solution analytique</span>
+<span class="n">axe</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_echelon</span><span class="p">,</span> <span class="n">ana_echelon</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Analytique&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>  <span class="c1"># Tracé de la solution analytique</span>
+
+<span class="n">axl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axl</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axe</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axe</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/elec_reponse_o1_correction_5_0.png" src="_images/elec_reponse_o1_correction_5_0.png" />
+<img alt="_images/elec_reponse_o1_correction_5_1.png" src="_images/elec_reponse_o1_correction_5_1.png" />
+</div>
+</div>
+<p><strong>On remarque que plus le pas d’intégration est faible, plus l’intégration est correcte.</strong></p>
+</div>
+<div class="section" id="rampe-de-tension">
+<h3><span class="section-number">2.2.4. </span>Rampe de tension<a class="headerlink" href="#rampe-de-tension" title="Permalink to this headline">¶</a></h3>
+<p>On va aussi réaliser une étude énergétique. Pour cela, il faut calculer l’intensité <span class="math notranslate nohighlight">\(i\)</span> par dérivation numérique puis l’énergie par intégration numérique.</p>
+<div class="section" id="derivation-numerique">
+<h4><span class="section-number">2.2.4.1. </span>Dérivation numérique.<a class="headerlink" href="#derivation-numerique" title="Permalink to this headline">¶</a></h4>
+<p>On va réaliser une dérivée numérique d’ordre 2. Pour un pas de temps <span class="math notranslate nohighlight">\(h\)</span>, on peut faire l’approximation de <span class="math notranslate nohighlight">\(y(t-h)\)</span> et <span class="math notranslate nohighlight">\(y(t+h)\)</span> par :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+y(t - h) &amp;= y(t) - h \frac{\rm{d}y}{\rm{dt}}(t)\\
+y(t + h) &amp;= y(t) + h \frac{\rm{d}y}{\rm{dt}}(t)
+\end{cases}
+\end{split}\]</div>
+<p>soit par soustraction :
+$<span class="math notranslate nohighlight">\(
+\frac{\rm{d}y}{\rm{dt}}(t) = \frac{y(t+h) - y(t-h)}{2h}
+\)</span>$</p>
+<p>soit pour la suite des <span class="math notranslate nohighlight">\(y_k\)</span> (on note la suite des valeurs de la dérivée <span class="math notranslate nohighlight">\(i_k\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+i_k = \frac{\rm{d}y}{\rm{dt}}(t_k) = \frac{y_{k+1} - y_{k-1}}{2h}
+\]</div>
+<p>Seul problème : <strong>on ne peut utiliser cette expression pour calculer la dérivée pour <span class="math notranslate nohighlight">\(k=0\)</span> et <span class="math notranslate nohighlight">\(k=k_{\max}\)</span></strong>. Pour les deux valeurs extrêmes, on va utiliser l’expression :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+i_0 &amp;= \frac{y_{1} - y_{0}}{h}\\
+i_{k_{\max}} &amp;= \frac{y_{k_{\max}} - y_{k_{\max} - 1}}{h}\\
+\end{cases}
+\end{split}\]</div>
+<blockquote>
+<div><p><strong>Exercice 4</strong></p>
+<ol class="simple">
+<li><p>Définir une fonction <code class="docutils literal notranslate"><span class="pre">deriv</span></code> qui prend comme argument le vecteur <code class="docutils literal notranslate"><span class="pre">y</span></code> des valeurs à dériver et le <code class="docutils literal notranslate"><span class="pre">pas</span></code> de calcul et qui renvoie le vecteur des valeurs dérivées.</p></li>
+<li><p>Vérifier son fonctionnement en calculant la dérivée des tensions pour les régimes libre et échelon de tension en traçant leur comparaison avec leurs expressions analytiques.</p></li>
+</ol>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">deriv</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">pas</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  <span class="c1"># Initialisation du vecteur des dérivées</span>
+    <span class="n">dy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">pas</span>  <span class="c1"># Premier terme</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>  <span class="c1"># On doit s&#39;arrêter à l&#39;indice N-2 pour remplir (pas le dernier terme)</span>
+        <span class="n">dy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">pas</span><span class="p">)</span>
+    <span class="n">dy</span><span class="p">[</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">N</span> <span class="o">-</span> <span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="n">pas</span>
+    <span class="k">return</span> <span class="n">dy</span>
+
+
+<span class="k">def</span> <span class="nf">dsol_libre</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">y0</span><span class="p">):</span>  <span class="c1"># Régime libre, solution analytique</span>
+    <span class="k">return</span> <span class="o">-</span> <span class="n">y0</span> <span class="o">/</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t1</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">dsol_echelon</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">y0</span><span class="p">):</span>  <span class="c1"># Echelon, solution analytique</span>
+    <span class="k">return</span> <span class="o">-</span> <span class="p">(</span><span class="n">y0</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t1</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span><span class="p">)</span>
+
+
+
+<span class="n">dnum_libre</span> <span class="o">=</span> <span class="n">deriv</span><span class="p">(</span><span class="n">num_libre</span><span class="p">,</span> <span class="n">pas</span><span class="p">)</span>
+<span class="n">dana_libre</span> <span class="o">=</span> <span class="n">dsol_libre</span><span class="p">(</span><span class="n">t_libre</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">dnum_echelon</span> <span class="o">=</span> <span class="n">deriv</span><span class="p">(</span><span class="n">num_echelon</span><span class="p">,</span> <span class="n">pas</span><span class="p">)</span>
+<span class="n">dana_echelon</span> <span class="o">=</span> <span class="n">dsol_echelon</span><span class="p">(</span><span class="n">t_echelon</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">fd</span><span class="p">,</span> <span class="n">axd</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Test de la dérivée&#39;</span><span class="p">)</span>
+<span class="n">axd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_libre</span><span class="p">,</span> <span class="n">dnum_libre</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Dérivée numérique&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">axd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_libre</span><span class="p">,</span> <span class="n">dana_libre</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Dérivée analytique&#39;</span><span class="p">)</span>
+
+<span class="n">axd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_echelon</span><span class="p">,</span> <span class="n">dnum_echelon</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Dérivée numérique&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">axd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_echelon</span><span class="p">,</span> <span class="n">dana_echelon</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Dérivée analytique&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/elec_reponse_o1_correction_8_0.png" src="_images/elec_reponse_o1_correction_8_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="integration-numerique">
+<h4><span class="section-number">2.2.4.2. </span>Intégration numérique.<a class="headerlink" href="#integration-numerique" title="Permalink to this headline">¶</a></h4>
+<p>On applique la méthode des rectangles pour calculer numériquement l’intégrale de <span class="math notranslate nohighlight">\(y(t)\)</span> entre <span class="math notranslate nohighlight">\(t_0\)</span> et <span class="math notranslate nohighlight">\(t_k\)</span>. On note <span class="math notranslate nohighlight">\(s_k\)</span> la valeur de cette intégrale et on prend <span class="math notranslate nohighlight">\(s_0 = 0\)</span> (l’énergie échangé initialement sera nulle). On définit donc la récurrence :</p>
+<div class="math notranslate nohighlight">
+\[
+s_{k+1} = s_k + h * y_k
+\]</div>
+<blockquote>
+<div><p><strong>Exercice 5</strong></p>
+<ol class="simple">
+<li><p>Définir une fonction <code class="docutils literal notranslate"><span class="pre">integ</span></code> qui prend comme argument le vecteur <code class="docutils literal notranslate"><span class="pre">y</span></code> à intégrer et le <code class="docutils literal notranslate"><span class="pre">pas</span></code> de calcul et qui renvoie le vecteur des valeurs intégrées.</p></li>
+<li><p>Vérifier son fonctionnement en calculant l’intégrale des tensions pour les régimes libre et échelon de tension en traçant leur comparaison avec leurs expressions analytiques.</p></li>
+</ol>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">integ</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">pas</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">iy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">iy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+        <span class="n">iy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">iy</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">pas</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">iy</span>
+
+
+<span class="k">def</span> <span class="nf">isol_libre</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">y0</span><span class="p">):</span>  <span class="c1"># Régime libre, solution analytique</span>
+    <span class="k">return</span> <span class="o">-</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">y0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t1</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span><span class="p">)</span> <span class="o">+</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">y0</span>
+
+
+<span class="k">def</span> <span class="nf">isol_echelon</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">y0</span><span class="p">):</span>  <span class="c1"># Echelon, solution analytique</span>
+    <span class="k">return</span> <span class="o">-</span> <span class="n">tau</span> <span class="o">*</span> <span class="p">(</span><span class="n">y0</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t1</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span><span class="p">)</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="n">tau</span> <span class="o">*</span> <span class="p">(</span><span class="n">y0</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+
+
+<span class="n">inum_libre</span> <span class="o">=</span> <span class="n">integ</span><span class="p">(</span><span class="n">num_libre</span><span class="p">,</span> <span class="n">pas</span><span class="p">)</span>
+<span class="n">iana_libre</span> <span class="o">=</span> <span class="n">isol_libre</span><span class="p">(</span><span class="n">t_libre</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">inum_echelon</span> <span class="o">=</span> <span class="n">integ</span><span class="p">(</span><span class="n">num_echelon</span><span class="p">,</span> <span class="n">pas</span><span class="p">)</span>
+<span class="n">iana_echelon</span> <span class="o">=</span> <span class="n">isol_echelon</span><span class="p">(</span><span class="n">t_echelon</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">fi</span><span class="p">,</span> <span class="n">axi</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">fi</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Test de la dérivée&#39;</span><span class="p">)</span>
+<span class="n">axi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_libre</span><span class="p">,</span> <span class="n">inum_libre</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Dérivée numérique&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">axi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_libre</span><span class="p">,</span> <span class="n">iana_libre</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Dérivée analytique&#39;</span><span class="p">)</span>
+
+<span class="n">axi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_echelon</span><span class="p">,</span> <span class="n">inum_echelon</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Dérivée numérique&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">axi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_echelon</span><span class="p">,</span> <span class="n">iana_echelon</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Dérivée analytique&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/elec_reponse_o1_correction_10_0.png" src="_images/elec_reponse_o1_correction_10_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="application-a-la-rampe">
+<h4><span class="section-number">2.2.4.3. </span>Application à la rampe.<a class="headerlink" href="#application-a-la-rampe" title="Permalink to this headline">¶</a></h4>
+<p>On étudie un circuit RC série soumis à une tension <span class="math notranslate nohighlight">\(E(t)\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+E(t) = 
+\begin{cases}
+0 &amp; \textrm{si t &lt;= 0}\\
+t / T0 &amp; \textrm{si 0 &lt; t &lt;= T0}\\
+1 &amp; \textrm{si t &gt; T0}\\
+\end{cases}
+\end{split}\]</div>
+<p>On prendra <span class="math notranslate nohighlight">\(R = 1\rm{k\Omega}; C = 1\rm{\mu F}; T0 = k \tau; u(t=0) = 0 \rm{V}\)</span></p>
+<blockquote>
+<div><p><strong>Exercice 6</strong></p>
+<ol class="simple">
+<li><p>Procéder à l’intégration de l’équation différentielle en choisissant un pas de calcul adapté pour <span class="math notranslate nohighlight">\(k=2\)</span>.</p></li>
+<li><p>En déduire l’intensité circulant dans le condensateur, l’énergie stockée dans le condensateur (aux mêmes instants <span class="math notranslate nohighlight">\(t_k\)</span>) et la énergie dissipée par la résistance et l’énergie fournie par la source (entre t=0  et <span class="math notranslate nohighlight">\(t=t_k\)</span>).</p></li>
+<li><p>Représenter quatre graphique dans une même fenêtre (2 lignes, 2 colonnes) représentant :</p>
+<ul class="simple">
+<li><p>premier graphique : les tensions <span class="math notranslate nohighlight">\(E(t)\)</span> et <span class="math notranslate nohighlight">\(u(t)\)</span></p></li>
+<li><p>deuxième graphique : l’intensité <span class="math notranslate nohighlight">\(i(t)\)</span></p></li>
+<li><p>troisième graphique ; le portrait de phase (ensemble des points de coordonnées (<span class="math notranslate nohighlight">\(u(t); \frac{du}{dt}(t)\)</span>))</p></li>
+<li><p>quatrième graphique ; l’évolution de l’énergie stockée dans le condensateur, celle délivrée par la source et celle dissipée par la résistance</p></li>
+</ul>
+</li>
+<li><p>Analyser physiquement les courbes obtenues.</p></li>
+<li><p>Reprendre l’étude en augmentant <span class="math notranslate nohighlight">\(k\)</span>. On commentera notamment l’énergie dissipée par effet Joule.</p></li>
+</ol>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; On prend un pas de temps égal à tau / 100. L&#39;étude précédente sur le pas</span>
+<span class="sd">avec des variations temporelles du même ordre monre que ça devrait suffire.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Données numériques</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">1e3</span>
+<span class="n">C</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="n">R</span> <span class="o">*</span> <span class="n">C</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">T0</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">tau</span>
+<span class="n">u0</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+<span class="c1"># Intégration numérique</span>
+<span class="n">pas</span> <span class="o">=</span> <span class="n">tau</span> <span class="o">/</span> <span class="mi">100</span>
+
+<span class="k">def</span> <span class="nf">rampe</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>  <span class="c1"># Définition de la rampe d&#39;entrée</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">T0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">t</span> <span class="o">/</span> <span class="n">T0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+
+
+<span class="k">def</span> <span class="nf">frampe</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>  <span class="c1"># Définition de la fonction f pour le schéma d&#39;Euler</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">rampe</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span>
+
+<span class="n">tf</span> <span class="o">=</span> <span class="n">T0</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">tau</span>  <span class="c1"># Temps final : On se donne une marge pour observer la fin de la rampe</span>
+<span class="n">t_rep</span><span class="p">,</span> <span class="n">u_rep</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">frampe</span><span class="p">,</span> <span class="n">pas</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">u0</span><span class="p">)</span>  <span class="c1"># Intégration de l&#39;équation</span>
+
+<span class="c1"># Calcul des grandeurs associées</span>
+<span class="n">du_rep</span> <span class="o">=</span> <span class="n">deriv</span><span class="p">(</span><span class="n">u_rep</span><span class="p">,</span> <span class="n">pas</span><span class="p">)</span>  <span class="c1"># Dérivée de u</span>
+<span class="n">i_rep</span> <span class="o">=</span> <span class="n">du_rep</span> <span class="o">*</span> <span class="n">C</span>  <span class="c1"># Intensité</span>
+<span class="n">EJ_rep</span> <span class="o">=</span> <span class="n">R</span> <span class="o">*</span> <span class="n">integ</span><span class="p">(</span><span class="n">i_rep</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">pas</span><span class="p">)</span>  <span class="c1"># Energie dissipée par effet Joule</span>
+<span class="n">Ec_rep</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">C</span> <span class="o">*</span> <span class="n">u_rep</span> <span class="o">**</span> <span class="mi">2</span>  <span class="c1"># Energie stockée dans C</span>
+<span class="n">Ef_rep</span> <span class="o">=</span> <span class="n">EJ_rep</span> <span class="o">+</span> <span class="n">Ec_rep</span>  <span class="c1"># Energie fournie par la source</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Calcul des valeurs de la rampes aux t_k pour le tracé</span>
+<span class="sd">La fonction rampe n&#39;est pas vectorialisable (condition if), on utilise une compréhension de liste</span>
+<span class="sd">pour aller plus vite mais on pourrait écrire une boucle.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">u_rampe</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">rampe</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_rep</span><span class="p">])</span>
+
+<span class="c1"># Tracé graphique</span>
+<span class="n">fr</span><span class="p">,</span> <span class="n">axr</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="n">fr</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Réponse à une rampe de tension&quot;</span><span class="p">)</span>
+
+<span class="c1"># Evolution temporelle de u(t)</span>
+<span class="n">axr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t(s)&quot;</span><span class="p">)</span>
+<span class="n">axr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;u(V)&quot;</span><span class="p">)</span>
+
+<span class="n">axr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_rep</span><span class="p">,</span> <span class="n">u_rep</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Uc(t)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">axr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_rep</span><span class="p">,</span> <span class="n">u_rampe</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;E(t)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+<span class="n">axr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Evolution temporelle de i(t)</span>
+<span class="n">axr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t(s)&quot;</span><span class="p">)</span>
+<span class="n">axr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;i(A)&quot;</span><span class="p">)</span>
+
+<span class="n">axr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_rep</span><span class="p">,</span> <span class="n">i_rep</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;i(t)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="n">axr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Portrait de phase</span>
+<span class="n">axr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;u(V)&quot;</span><span class="p">)</span>
+<span class="n">axr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;du/dt(V/s)&quot;</span><span class="p">)</span>
+
+<span class="n">axr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u_rep</span><span class="p">,</span> <span class="n">du_rep</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Portrait de phase&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="n">axr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Evolution énergétique</span>
+<span class="n">axr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t(s))&quot;</span><span class="p">)</span>
+<span class="n">axr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;E(J)&quot;</span><span class="p">)</span>
+
+<span class="n">axr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_rep</span><span class="p">,</span> <span class="n">EJ_rep</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Effet Joule&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">axr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_rep</span><span class="p">,</span> <span class="n">Ec_rep</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Energie stockée&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">axr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_rep</span><span class="p">,</span> <span class="n">Ef_rep</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Effet fournie&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="n">axr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/elec_reponse_o1_correction_12_0.png" src="_images/elec_reponse_o1_correction_12_0.png" />
+</div>
+</div>
+<p>On remarque plus on augmente <code class="docutils literal notranslate"><span class="pre">k</span></code>, plus <span class="math notranslate nohighlight">\(U_c(t)\)</span> arrive à suivre <span class="math notranslate nohighlight">\(E(t)\)</span> et plus l’intensité est faible : il vient que les pertes par effet Joule sont faible : on transfert presque toutes l’énergie fournie au condensateur. On parlera de transformation quasi-statique.</p>
+<p>On va maintenant étudier plus précisément le rapport <span class="math notranslate nohighlight">\(\eta\)</span>. On assimile ce rapport calculé à l’infini par le même après un temps long soit pour <span class="math notranslate nohighlight">\(t = T_0 + 10 * \tau\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>  <span class="c1"># On trace sur 4 décades avec 4 points par décade.</span>
+<span class="n">etas</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Liste où on stocke les rendements</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ks</span><span class="p">:</span>
+    <span class="n">T0</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">tau</span>
+    <span class="n">u0</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+    <span class="c1"># Intégration numérique</span>
+    <span class="n">pas</span> <span class="o">=</span> <span class="n">tau</span> <span class="o">/</span> <span class="mi">100</span>
+
+    <span class="k">def</span> <span class="nf">rampe</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>  <span class="c1"># Définition de la rampe d&#39;entrée</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">T0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">t</span> <span class="o">/</span> <span class="n">T0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+
+
+    <span class="k">def</span> <span class="nf">frampe</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>  <span class="c1"># Définition de la fonction f pour le schéma d&#39;Euler</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">rampe</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span>
+
+    <span class="n">tf</span> <span class="o">=</span> <span class="n">T0</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">tau</span>  <span class="c1"># Temps final : On se donne une marge pour observer la fin de la rampe</span>
+    <span class="n">t_rep</span><span class="p">,</span> <span class="n">u_rep</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">frampe</span><span class="p">,</span> <span class="n">pas</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">u0</span><span class="p">)</span>  <span class="c1"># Intégration de l&#39;équation</span>
+
+    <span class="c1"># Calcul des grandeurs associées</span>
+    <span class="n">du_rep</span> <span class="o">=</span> <span class="n">deriv</span><span class="p">(</span><span class="n">u_rep</span><span class="p">,</span> <span class="n">pas</span><span class="p">)</span>  <span class="c1"># Dérivée de u</span>
+    <span class="n">i_rep</span> <span class="o">=</span> <span class="n">du_rep</span> <span class="o">*</span> <span class="n">C</span>  <span class="c1"># Intensité</span>
+    <span class="n">EJ_rep</span> <span class="o">=</span> <span class="n">R</span> <span class="o">*</span> <span class="n">integ</span><span class="p">(</span><span class="n">i_rep</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">pas</span><span class="p">)</span>  <span class="c1"># Energie dissipée par effet Joule</span>
+    <span class="n">Ec_rep</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">C</span> <span class="o">*</span> <span class="n">u_rep</span> <span class="o">**</span> <span class="mi">2</span>  <span class="c1"># Energie stockée dans C</span>
+    <span class="n">Ef_rep</span> <span class="o">=</span> <span class="n">EJ_rep</span> <span class="o">+</span> <span class="n">Ec_rep</span>  <span class="c1"># Energie fournie par la source</span>
+    <span class="n">eta</span> <span class="o">=</span> <span class="n">Ec_rep</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">Ef_rep</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">etas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eta</span><span class="p">)</span>
+
+<span class="n">etas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">etas</span><span class="p">)</span>
+
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">f</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Influence de la pente de la rampe&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;eta&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span> <span class="n">etas</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;eta(k)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/elec_reponse_o1_correction_14_0.png" src="_images/elec_reponse_o1_correction_14_0.png" />
+</div>
+</div>
+<p>On remarque comme attendu qu’on tend vers un rendement qui vaut 1. On observe aussi une nette augmentation du rendement quand la durée de la rampe devient supérieure au temps caractéristique. On pourra donc se contenter de <span class="math notranslate nohighlight">\(T_0 = 10 \tau\)</span> de manière à avoir un rendement supérieur à 80%.</p>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="signal_fourier_correction.html" title="previous page"><span class="section-number">1. </span>Analyse spectrale d’un signal</a>
+    <a class='right-next' id="next-link" href="elec_filtrage_correction.html" title="next page"><span class="section-number">3. </span>Etude numérique d’un filtre linéaire</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By C. Lacpatia<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

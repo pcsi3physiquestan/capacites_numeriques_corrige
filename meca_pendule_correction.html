@@ -1,0 +1,900 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5. Etude d’un pendule simple &#8212; Capacités numériques - Corrigés</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://pcsi3physiquestan.github.io/capacite_numerique_c/meca_pendule_correction.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="6. Etude d’un mouvement à force centrale" href="meca_force_centrale_correction.html" />
+    <link rel="prev" title="4. Système conservatif : Effets non linéaires." href="meca_non_lineaire_correction.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://pcsi3physiquestan.github.io/capacite_numerique_c/meca_pendule_correction.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Etude d’un pendule simple" />
+<meta property="og:description" content="Etude d’un pendule simple  But : à l’aide d’un langage de programmation, mettre en évidence le non isochronisme des oscillations d’un pendule.  Position du prob" />
+
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Capacités numériques - Corrigés</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="capacite_numerique_c.html">
+   Capacités numériques en physique
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="signal_fourier_correction.html">
+   1. Analyse spectrale d’un signal
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="elec_reponse_o1_correction.html">
+   2. Résolution numérique d’une équation différentielle d’ordre 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="elec_filtrage_correction.html">
+   3. Etude numérique d’un filtre linéaire
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="meca_non_lineaire_correction.html">
+   4. Système conservatif : Effets non linéaires.
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   5. Etude d’un pendule simple
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="meca_force_centrale_correction.html">
+   6. Etude d’un mouvement à force centrale
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="thermo_statique_correction.html">
+   7. Etude de l’atmosphère terrestre
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <a href="https://www.cedriclacpatia.fr">Site de la classe</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="_sources/meca_pendule_correction.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/meca_pendule_correction.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/meca_pendule_correction.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#position-du-probleme">
+   5.1. Position du problème
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mise-en-equation">
+     5.1.1. Mise en équation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#schema-d-euler">
+     5.1.2. Schéma d’Euler
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementation-du-schema-d-euler">
+   5.2. Implémentation du schéma d’Euler
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#test-sur-le-systeme-aux-petits-angles">
+   5.3. Test sur le système aux petits angles
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integration-numerique">
+     5.3.1. Intégration numérique
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#determination-de-la-periode">
+     5.3.2. Détermination de la période.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anisochronisme-des-grandes-oscillations">
+   5.4. Anisochronisme des grandes oscillations.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#trajectoire-de-diffusion">
+   5.5. Trajectoire de diffusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#complement-utilisation-d-une-methode-symplectique">
+   5.6. Complément : Utilisation d’une méthode symplectique
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="etude-d-un-pendule-simple">
+<h1><span class="section-number">5. </span>Etude d’un pendule simple<a class="headerlink" href="#etude-d-un-pendule-simple" title="Permalink to this headline">¶</a></h1>
+<p><strong>But :</strong> à l’aide d’un langage de programmation, mettre en évidence le non isochronisme des oscillations d’un pendule.</p>
+<div class="section" id="position-du-probleme">
+<h2><span class="section-number">5.1. </span>Position du problème<a class="headerlink" href="#position-du-probleme" title="Permalink to this headline">¶</a></h2>
+<p>Nous allons chercher à étudier les oscillations d’un pendule simple :</p>
+<ol class="simple">
+<li><p>Aux petites oscillations. Ce sera l’occasion de tester le schéma d’Euler mis en place pour étudier le système en le comparant aux attentes.</p></li>
+<li><p>Pour des oscillations quelconques. On cherchera alors à déterminer la période des oscillations en fonction de l’amplitude pour observer le <strong>non isochoronisme des oscillations</strong>. On comparera notamment les résultats trouvés à la formule théorique faisant intervenir une intégrale.</p></li>
+</ol>
+<div class="section" id="mise-en-equation">
+<h3><span class="section-number">5.1.1. </span>Mise en équation<a class="headerlink" href="#mise-en-equation" title="Permalink to this headline">¶</a></h3>
+<p>On considère un pendule simple de longueur <span class="math notranslate nohighlight">\(l\)</span> sans sources d’amortissement dans un champ de pesanteur uniforme <span class="math notranslate nohighlight">\(g\)</span>. La masse au bout du pendule est <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<p>Pour les applications numériques, on prendra <span class="math notranslate nohighlight">\(l = 1 m; g = 9.81 m.s^{-2}; m=1 kg\)</span>.</p>
+<p>On rappelle que la mise en équation du pendule amène à l’équation :</p>
+<div class="math notranslate nohighlight">
+\[
+\ddot \theta + {g \over l} \sin \theta = 0
+\]</div>
+<p>qui devient aux petits angles :</p>
+<div class="math notranslate nohighlight">
+\[
+\ddot \theta + {g \over l} \theta = 0
+\]</div>
+<p>L’énergie potentielle de pesanteur s’écrit :</p>
+<div class="math notranslate nohighlight">
+\[
+E_p(\theta) = mgl(1 - \cos \theta)
+\]</div>
+<p>et l’énergie cinétique : <span class="math notranslate nohighlight">\(E_c = {1 \over 2} m l^2 \dot \theta^2\)</span></p>
+</div>
+<div class="section" id="schema-d-euler">
+<h3><span class="section-number">5.1.2. </span>Schéma d’Euler<a class="headerlink" href="#schema-d-euler" title="Permalink to this headline">¶</a></h3>
+<p>On va utiliser un schéma d’Euler explicite. Le système étant d’ordre 2, on utilise un système d’équations différentielles définit par la relation vectorielle :</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\rm{d}Y}{\rm{dt}} = F(t, Y(t))
+\]</div>
+<p>où
+<span class="math notranslate nohighlight">\( Y(t) = \begin{pmatrix}
+\theta(t)\\
+\dot \theta(t)
+\end{pmatrix}
+\)</span></p>
+<p>Pour des valeurs discrètes <span class="math notranslate nohighlight">\(Y_k\)</span> aux temps <span class="math notranslate nohighlight">\(t_k\)</span> (on notera <span class="math notranslate nohighlight">\(x_k\)</span> et <span class="math notranslate nohighlight">\(v_k\)</span> les valeurs de <span class="math notranslate nohighlight">\(\theta(t)\)</span> et <span class="math notranslate nohighlight">\(\dot \theta(t)\)</span> aux temps <span class="math notranslate nohighlight">\(t_k\)</span>), on peut approcher la dérivée de la fonction entre <span class="math notranslate nohighlight">\(t_k\)</span> et <span class="math notranslate nohighlight">\(t_{k+1}\)</span> par :</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\rm{d}Y}{\rm{dt}} = {Y_{k+1} - Y_{k} \over t_{k+1} - t_k}
+\]</div>
+<p>soit, en notant <span class="math notranslate nohighlight">\(h = t_{k+1} - t_k\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[
+Y_{k+1} = Y_k + h \times F(t_k, Y(t_k))
+\]</div>
+<p>On a la relation de récurrence qui définit les <span class="math notranslate nohighlight">\(Y_k\)</span> par le schéma d’Euler (explicite).</p>
+</div>
+</div>
+<div class="section" id="implementation-du-schema-d-euler">
+<h2><span class="section-number">5.2. </span>Implémentation du schéma d’Euler<a class="headerlink" href="#implementation-du-schema-d-euler" title="Permalink to this headline">¶</a></h2>
+<p>Cette fois, on va directement raisonner avec le <strong>vecteur <span class="math notranslate nohighlight">\(Y_k\)</span></strong> et non avec deux grandeurs séparées <span class="math notranslate nohighlight">\(\theta_k\)</span> et <span class="math notranslate nohighlight">\(\dot \theta_k\)</span></p>
+<blockquote>
+<div><p><strong>Exercice 1 :</strong><br />
+Vous devez :</p>
+<ol class="simple">
+<li><p>Ecrire une fonction <code class="docutils literal notranslate"><span class="pre">F_petit</span></code> qui prend comme argument un flottant <code class="docutils literal notranslate"><span class="pre">t</span></code> et un vecteur <code class="docutils literal notranslate"><span class="pre">Y</span></code> à deux éléments et qui renvoie le vecteur <code class="docutils literal notranslate"><span class="pre">F(t,</span> <span class="pre">Y)</span></code> dans le cas d’un pendule aux petites oscillations.</p></li>
+<li><p>Ecrire une fonction <code class="docutils literal notranslate"><span class="pre">euler</span></code> qui prend comme arguments :</p>
+<ul class="simple">
+<li><p>une fonction <code class="docutils literal notranslate"><span class="pre">F</span></code> (semblable à <code class="docutils literal notranslate"><span class="pre">F_petit</span></code> qui prendra le même type d’arguments et renverra le même type de vecteur).</p></li>
+<li><p>un vecteur <code class="docutils literal notranslate"><span class="pre">Y0</span></code> donnant les <strong>deux</strong> conditions initiales (ici à <span class="math notranslate nohighlight">\(t=0\)</span>) sur les deux composants de <code class="docutils literal notranslate"><span class="pre">Y</span></code></p></li>
+<li><p>un flottant <code class="docutils literal notranslate"><span class="pre">h</span></code> qui sera le pas d’intégration <span class="math notranslate nohighlight">\(h = t_{k+1} - t_k\)</span></p></li>
+<li><p>un flottant <code class="docutils literal notranslate"><span class="pre">tf</span></code> qui sera le temps final de l’intégration.
+et qui renvoie :</p></li>
+<li><p>un vecteur contenant les temps <span class="math notranslate nohighlight">\(t_k\)</span> et un tableau à 2 colonnes contenant respectivement : les angles <span class="math notranslate nohighlight">\(\theta_k\)</span> et les vitesses angulaires <span class="math notranslate nohighlight">\(\dot \theta_k\)</span>.</p></li>
+</ul>
+</li>
+</ol>
+</div></blockquote>
+<p><em>Données utiles :</em></p>
+<ul class="simple">
+<li><p>Pour créer un tableau, de taille N lignes et 2 colonnes rempli de 0, la syntaxe est <code class="docutils literal notranslate"><span class="pre">np.zeros((N,</span> <span class="pre">2))</span></code>. A vous de prévoir le nombre de lignes du tableau.</p></li>
+<li><p>La sélection de la ligne d’indice i d’un tableau se fait par <code class="docutils literal notranslate"><span class="pre">tableau[i]</span></code>. Attention, les indices commencent à 0 et se terminent à N-1.</p></li>
+<li><p>La sélection de l’élément d’indice (i, j) d’un tableau se fait par <code class="docutils literal notranslate"><span class="pre">tableau[i,</span> <span class="pre">j]</span></code>. Attention, les indices commencent à 0 et se terminent à N-1.</p></li>
+<li><p>Vous pouvez remplier directement une ligne d’un tableau numpy par la syntaxe <code class="docutils literal notranslate"><span class="pre">tableau[indice_ligne]</span> <span class="pre">=</span> <span class="pre">[v1,</span> <span class="pre">v2]</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Ne pas oublier d&#39;importer les bibliothèques scientifiques.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span>  <span class="c1"># Champ de pesanteur</span>
+<span class="n">l</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Longueur du pendule</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Masse</span>
+
+<span class="k">def</span> <span class="nf">F_petit</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fonction F pour les petites oscillations&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">Y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span> <span class="n">g</span> <span class="o">/</span> <span class="n">l</span> <span class="o">*</span> <span class="n">Y</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+
+
+<span class="k">def</span> <span class="nf">euler</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">Y0</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">tf</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tf</span> <span class="o">/</span> <span class="n">h</span><span class="p">)</span>  <span class="c1"># Nombre de points</span>
+    <span class="n">temps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  <span class="c1"># Vecteur des temps</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># Tableau des solutions</span>
+    <span class="n">temps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Initialisation du vecteur temps (inutile ici en réalité)</span>
+    <span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">Y0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Y0</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>  <span class="c1"># Initialisation du tableau</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>  <span class="c1"># On commence à puisqu&#39;on a déjà rempli le 0</span>
+        <span class="n">dY</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">temps</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">sol</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">newtemps</span> <span class="o">=</span> <span class="n">temps</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">h</span>
+        <span class="n">newY</span> <span class="o">=</span> <span class="n">sol</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="n">dY</span>
+        <span class="n">temps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">newtemps</span>
+        <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">newY</span>
+    <span class="k">return</span> <span class="n">temps</span><span class="p">,</span> <span class="n">sol</span>
+        
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="test-sur-le-systeme-aux-petits-angles">
+<h2><span class="section-number">5.3. </span>Test sur le système aux petits angles<a class="headerlink" href="#test-sur-le-systeme-aux-petits-angles" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="integration-numerique">
+<h3><span class="section-number">5.3.1. </span>Intégration numérique<a class="headerlink" href="#integration-numerique" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>Exercice 2 :</strong><br />
+Vous devez :</p>
+<ol class="simple">
+<li><p>Ecrire une fonction <code class="docutils literal notranslate"><span class="pre">sol_ptangle</span></code> qui prend comme argument un temps <code class="docutils literal notranslate"><span class="pre">t</span></code> et un vecteur à deux éléments <code class="docutils literal notranslate"><span class="pre">Y0</span></code> et qui renvoie la solution analytique de l’équation du pendule simple aux petits angles avec comme conditions initiales les élements du vecteur <code class="docutils literal notranslate"><span class="pre">Y0</span></code> à l’instant <code class="docutils literal notranslate"><span class="pre">t</span></code>. Cette fonction devra être vectorialisable c’est-à-dire qu’elle doit pouvoir s’appliquer correctement que <code class="docutils literal notranslate"><span class="pre">t</span></code> soit un flottant ou un vecteur numpy.</p></li>
+<li><p>Utiliser la fonction <code class="docutils literal notranslate"><span class="pre">euler</span></code> pour résoudre numériquement le cas du pendule aux petits angles en supposant que le pendule par du point le plus bas avec une vitesse angulaire <span class="math notranslate nohighlight">\(\omega_i = .1 rad/s\)</span>. Tracer alors sur le même graphique la solution analytique et la solution numérique pour les comparer. <strong>On réfléchira au choix du pas d’intégration et à l’intervale de temps <span class="math notranslate nohighlight">\([0, t_f]\)</span> d’étude.</strong></p></li>
+</ol>
+</div></blockquote>
+<p><em>Données utiles :</em></p>
+<ul class="simple">
+<li><p>Pour sélectionner une colonne d’un tableau, on utilise la syntaxe <code class="docutils literal notranslate"><span class="pre">tableau[:,</span> <span class="pre">i]</span></code> où <code class="docutils literal notranslate"><span class="pre">i</span></code> est l’indice de la colonne (qui démarre à 0).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sol_ptangle</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Y0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Solution analytique d&#39;un OH caclulé au temps t&quot;&quot;&quot;</span>
+    <span class="n">w0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">g</span> <span class="o">/</span> <span class="n">l</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Y0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">w0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">Y0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">w0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">w0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+
+<span class="n">omegai</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># Vitesse angulaire initiale</span>
+<span class="n">T0</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">l</span> <span class="o">/</span> <span class="n">g</span><span class="p">)</span>  <span class="c1"># Période propre</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">T0</span> <span class="o">/</span> <span class="mf">1e4</span>  <span class="c1"># Un pas correspondant à 1/10000 de la période propre.</span>
+<span class="n">tf</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">T0</span>  <span class="c1"># Tracé sur trois période</span>
+<span class="n">tsol_ptnum</span><span class="p">,</span> <span class="n">Ysol_ptnum</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">F_petit</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">omegai</span><span class="p">],</span> <span class="n">h</span><span class="p">,</span> <span class="n">tf</span><span class="p">)</span>
+
+
+<span class="n">ysol_ptana</span> <span class="o">=</span> <span class="n">sol_ptangle</span><span class="p">(</span><span class="n">tsol_ptnum</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">omegai</span><span class="p">])</span>  <span class="c1"># Calcul de la solution analytique aux mêmes temps</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Tracé graphique pour comparaison.&quot;&quot;&quot;</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">f</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Pendule aux petits angles&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t(s)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;theta(rad)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tsol_ptnum</span><span class="p">,</span> <span class="n">Ysol_ptnum</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Solution numérique&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tsol_ptnum</span><span class="p">,</span> <span class="n">ysol_ptana</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Solution analytique&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/meca_pendule_correction_5_0.png" src="_images/meca_pendule_correction_5_0.png" />
+</div>
+</div>
+<p>La solution est correcte.</p>
+<p><strong>NOTE :</strong> Essayer avec un pas plus faible (<span class="math notranslate nohighlight">\(h = T_0 / 1000\)</span>) et vous verrez que l’amplitude des oscillations grandit lentement : l’énergie dérive. C’est un problème qu’on observe avec le schéma d’intégration d’Euler qui ne conserve malheureusement pas l’énergie.</p>
+</div>
+<div class="section" id="determination-de-la-periode">
+<h3><span class="section-number">5.3.2. </span>Détermination de la période.<a class="headerlink" href="#determination-de-la-periode" title="Permalink to this headline">¶</a></h3>
+<p>Par la suite, le signal ne sera plus forcément sinusoïdal mais restera périodique, on va chercher à déterminer la période du signal obtenu par résolution numérique.</p>
+<p><strong>Méthode choisie</strong> : On va déterminer les temps <span class="math notranslate nohighlight">\(t_{0i}\)</span> successifs des points où la solution numérique pour <span class="math notranslate nohighlight">\(\theta(t)\)</span> s’annule. Comme il n’y a que 2 annulations des angles dans une période (cf. étude des systèmes conservatifs), il suffira de compter le nombre <span class="math notranslate nohighlight">\(N_0\)</span> de 0. La période <span class="math notranslate nohighlight">\(T\)</span> du signal s’écrit alors :</p>
+<div class="math notranslate nohighlight">
+\[
+T = {t_{0N_0} - t_{01} \over {N_0 - 1 \over  2}}
+\]</div>
+<blockquote>
+<div><p><strong>Exercice 3 :</strong></p>
+<ol class="simple">
+<li><p>Ecrire une fonction <code class="docutils literal notranslate"><span class="pre">periode</span></code> qui prend en arguments deux vecteurs de mêmes taille <code class="docutils literal notranslate"><span class="pre">tk</span></code> et <code class="docutils literal notranslate"><span class="pre">thetak</span></code> et qui renvoie la période du signal <code class="docutils literal notranslate"><span class="pre">thetak</span></code> en considérant les <code class="docutils literal notranslate"><span class="pre">tk</span></code> comme les temps associés.</p></li>
+<li><p>Tester votre fonction sur le signal intégré numériquement pour vérifier que vous trouvez bien la bonne période.</p></li>
+</ol>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">periode</span><span class="p">(</span><span class="n">tk</span><span class="p">,</span> <span class="n">thetak</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fonction qui renvoie la période d&#39;un signal période thetak exprimé aux temps tk&quot;&quot;&quot;</span>
+    <span class="n">tps0</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># On va stocker les temps où le signal s&#39;annule dans cette liste</span>
+    <span class="sd">&quot;&quot;&quot;Remarque : on n&#39;utilise pas ici de vecteur numpy car on ne connaît pas à l&#39;avance la taille de tps0&quot;&quot;&quot;</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">thetak</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">thetak</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">thetak</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Le signal change de signe</span>
+            <span class="n">tps0</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tk</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">tk</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># On ajoute le temps moyen à la liste des zéros.</span>
+    <span class="n">N0</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tps0</span><span class="p">)</span>  <span class="c1"># Nombre de zéros.</span>
+    <span class="k">if</span> <span class="n">N0</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">per</span> <span class="o">=</span> <span class="p">(</span><span class="n">tps0</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tps0</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="p">((</span><span class="n">N0</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">per</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">per</span>
+
+<span class="n">per_pt</span> <span class="o">=</span> <span class="n">periode</span><span class="p">(</span><span class="n">tsol_ptnum</span><span class="p">,</span> <span class="n">Ysol_ptnum</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------------&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Période estimée : </span><span class="si">{}</span><span class="s2"> s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">per_pt</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Période propre : </span><span class="si">{}</span><span class="s2"> s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">T0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------------&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------
+Période estimée : 2.006066680709236 s
+Période propre : 2.0060666807106475 s
+-----------------
+</pre></div>
+</div>
+</div>
+</div>
+<p>On peut considérer la méthode comme correcte.</p>
+</div>
+</div>
+<div class="section" id="anisochronisme-des-grandes-oscillations">
+<h2><span class="section-number">5.4. </span>Anisochronisme des grandes oscillations.<a class="headerlink" href="#anisochronisme-des-grandes-oscillations" title="Permalink to this headline">¶</a></h2>
+<p>On a observé théoriquement que la période des oscillations dépendaient aux fortes amplitudes des oscillations. Son expression théorique est :</p>
+<div class="math notranslate nohighlight">
+\[
+T = 4 \int_0^{\theta_0} {d\theta \over \sqrt{{2g \over l}(\cos \theta - \cos \theta_0)}}
+\]</div>
+<blockquote>
+<div><p><strong>Exercice 4 :</strong></p>
+<ol class="simple">
+<li><p>Pour une liste d’amplitude angulaire entre 0 et <span class="math notranslate nohighlight">\(\pi\)</span> (non inclus) (5 valeurs), vous devez :</p>
+<ul class="simple">
+<li><p>Procéder à l’intégration numérique de l’évolution de l’angle <em>sans approximation</em> pour l’amplitude considérée et la solution analytique aux petits angles</p></li>
+<li><p>Tracer sur deux graphiques : l’évolution temporelle de <span class="math notranslate nohighlight">\(\theta(t)\)</span> et le portrait de phase du pendule our l’amplitude considérée.</p></li>
+<li><p>Comparer à chaque fois la solution aux petits angles et la solution numérique trouvée.</p></li>
+</ul>
+</li>
+<li><p>Ecrire une fonction <code class="docutils literal notranslate"><span class="pre">periode_borda</span></code> qui renvoie pour une amplitude <code class="docutils literal notranslate"><span class="pre">theta0</span></code> donnée la période approchée par la formule de Borda</p></li>
+<li><p>Pour une liste d’amplitude angulaire entre <span class="math notranslate nohighlight">\(\pi / 50\)</span> et <span class="math notranslate nohighlight">\(\pi\)</span> (non inclus) (49 valeurs), vous devez déterminer pour chaque amplitude la période des oscillations pour le signal obtenu numériquement <span class="math notranslate nohighlight">\(T_{num}(\theta_0)\)</span> et par la formule de Borda <span class="math notranslate nohighlight">\(T_{Borda}(\theta_0)\)</span> puis représenter les deux périodes en fonction de l’amplitude.</p>
+<ul class="simple">
+<li><p>Observer alors l’anisochronisme des oscillations</p></li>
+<li><p>Comparer les résultats obtenus par l’intégrale et par intégration numérique de l’équation différentielle. A partir de quand doit-on considérer la formule de Borda non acceptable.</p></li>
+</ul>
+</li>
+</ol>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Lamp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span> <span class="mi">5</span>  <span class="c1"># Liste des valeurs d&#39;amplitude</span>
+
+<span class="sd">&quot;&quot;&quot; Pour des questions de visibilité, on ne trace qu&#39;une seule amplitude à chaque fois.</span>
+<span class="sd">On pourra faire une animation mais ce n&#39;est pas dans le cadre du programme</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">indice</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># Indice à modifier pour observer une autre amplitude.</span>
+<span class="n">ampl</span> <span class="o">=</span> <span class="n">Lamp</span><span class="p">[</span><span class="n">indice</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">F_grand</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Renvoie la fonction F pour le schéma d&#39;Euler aux angles quelconques&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">Y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span> <span class="n">g</span> <span class="o">/</span> <span class="n">l</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
+
+
+<span class="k">def</span> <span class="nf">dsol_ptangle</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Y0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Solution analytique de la vitesse angulaire d&#39;un OH caclulé au temps t&quot;&quot;&quot;</span>
+    <span class="n">w0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">g</span> <span class="o">/</span> <span class="n">l</span><span class="p">)</span>
+    <span class="k">return</span> <span class="o">-</span> <span class="n">w0</span> <span class="o">*</span> <span class="n">Y0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">w0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">Y0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">w0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="n">tf</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">T0</span>  <span class="c1"># On modifie le temps final car on s&#39;attend à une augmentation de la période.</span>
+<span class="n">tsol_num</span><span class="p">,</span> <span class="n">Ysol_num</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">F_grand</span><span class="p">,</span> <span class="p">[</span><span class="n">ampl</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">h</span><span class="p">,</span> <span class="n">tf</span><span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot;Solution analytique&quot;&quot;&quot;</span>
+<span class="n">ysol_ana</span> <span class="o">=</span> <span class="n">sol_ptangle</span><span class="p">(</span><span class="n">tsol_num</span><span class="p">,</span> <span class="p">[</span><span class="n">ampl</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>  <span class="c1"># Calcul de la solution analytique aux mêmes temps</span>
+<span class="n">dysol_ana</span> <span class="o">=</span> <span class="n">dsol_ptangle</span><span class="p">(</span><span class="n">tsol_num</span><span class="p">,</span> <span class="p">[</span><span class="n">ampl</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>  <span class="c1"># Calcul de la solution analytique aux mêmes temps</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Tracé graphique pour comparaison.&quot;&quot;&quot;</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">f</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Pendule aux angles quelconque&quot;</span><span class="p">)</span>
+<span class="c1"># Tracé temporel</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t(s)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;theta(rad)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tsol_num</span><span class="p">,</span> <span class="n">Ysol_num</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Solution numérique&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tsol_num</span><span class="p">,</span> <span class="n">ysol_ana</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Solution analytique&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Portrait de phase</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;theta(rad)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;dtheta(rad/s)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ysol_num</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">Ysol_num</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Solution numérique&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ysol_ana</span><span class="p">,</span> <span class="n">dysol_ana</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Solution analytique&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/meca_pendule_correction_11_0.png" src="_images/meca_pendule_correction_11_0.png" />
+</div>
+</div>
+<p>On observe qu’en augmentant l’amplitude,</p>
+<ul class="simple">
+<li><p>le signal commence par garder une allure presque sinusoïdal mais la période n’est plus la période propre.</p></li>
+<li><p>en augmentant encore l’amplitude, l’allure temporelle n’est même plus sinusoïdal (on observe d’ailleurs que le portrait de phase n’est plus une ellipse).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Etude de la période&quot;&quot;&quot;</span>
+<span class="n">Namp</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># Nombre d&#39;amplitudes étudiées</span>
+<span class="n">Lamp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Namp</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span> <span class="n">Namp</span>  <span class="c1"># Amplitudes étudiées</span>
+<span class="n">tf</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">T0</span>  <span class="c1"># On modifie le temps final car on s&#39;attend à une augmentation de la période.</span>
+
+<span class="k">def</span> <span class="nf">periode_borda</span><span class="p">(</span><span class="n">theta0</span><span class="p">):</span>
+    <span class="n">T0</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">l</span> <span class="o">/</span> <span class="n">g</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Calcul de l&#39;intégrande pour l&#39;intégration numérique&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">T0</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">theta0</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">16</span><span class="p">)</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Cette fois, on réalise bien un boucle sur toutes les amplitudes pour déterminer la période.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">per_num</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Namp</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># On va y stocker les périodes estimées</span>
+<span class="n">per_ana</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Namp</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">Nint</span> <span class="o">=</span> <span class="mi">10000</span>  <span class="c1"># Nombres de trapèzes pour l&#39;intégration numérique</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Namp</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">ampl</span> <span class="o">=</span> <span class="n">Lamp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">tsol_num</span><span class="p">,</span> <span class="n">Ysol_num</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">F_grand</span><span class="p">,</span> <span class="p">[</span><span class="n">ampl</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">h</span><span class="p">,</span> <span class="n">tf</span><span class="p">)</span>
+    <span class="n">per</span> <span class="o">=</span> <span class="n">periode</span><span class="p">(</span><span class="n">tsol_num</span><span class="p">,</span> <span class="n">Ysol_num</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">pera</span> <span class="o">=</span> <span class="n">periode_borda</span><span class="p">(</span><span class="n">ampl</span><span class="p">)</span>
+    <span class="n">per_num</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">per</span>
+    <span class="n">per_ana</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">pera</span>
+
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Etude de l&#39;anisochronisme&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Amplitude(rad)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Période(s)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Lamp</span><span class="p">,</span> <span class="n">per_num</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Par Euler&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Lamp</span><span class="p">,</span> <span class="n">per_ana</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Par intégration numérique&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Amplitude(rad)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Ecart relatif&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Lamp</span><span class="p">,</span> <span class="p">(</span><span class="n">per_num</span> <span class="o">-</span> <span class="n">per_ana</span><span class="p">)</span> <span class="o">/</span> <span class="n">per_ana</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/meca_pendule_correction_13_0.png" src="_images/meca_pendule_correction_13_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>On observe comme attendu que la période dépend de l’amplitude et qu’elle diverge quand on s’approche d’une amplitude de <span class="math notranslate nohighlight">\(\pi\)</span>.</p></li>
+<li><p>La formule de Borda reste valable jusqu’à environ 1 rad  soit environ 60°</p></li>
+</ul>
+</div>
+<div class="section" id="trajectoire-de-diffusion">
+<h2><span class="section-number">5.5. </span>Trajectoire de diffusion<a class="headerlink" href="#trajectoire-de-diffusion" title="Permalink to this headline">¶</a></h2>
+<p>On s’intéresse au cas où le pendule part de sa position la plus basse avec une vitesse angulaire <span class="math notranslate nohighlight">\(\omega_i\)</span>.</p>
+<blockquote>
+<div><p><strong>Exercice 5 :</strong></p>
+<ol class="simple">
+<li><p>Déterminer par le calcul la pulsation <span class="math notranslate nohighlight">\(\omega_i\)</span> qui permet d’atteindre l’angle <span class="math notranslate nohighlight">\(\pi\)</span> et de s’y arrêter. En théorie, quel temps met-on pour atteindre ce point ?</p></li>
+<li><p>Intégrer l’équation du pendule avec la valeur de <span class="math notranslate nohighlight">\(\omega_i\)</span> précédente et observer l’allure de <span class="math notranslate nohighlight">\(\theta(t)\)</span> et <span class="math notranslate nohighlight">\(\dot \theta(t)\)</span>. Commenter</p></li>
+<li><p>Intégrer l’équation du pendule avec une valeur de <span class="math notranslate nohighlight">\(\omega_i\)</span> supérieure à celle trouvée précédemment et observer l’allure de <span class="math notranslate nohighlight">\(\theta(t)\)</span> et <span class="math notranslate nohighlight">\(\dot \theta(t)\)</span>. Commenter.</p></li>
+</ol>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Etude du cas limite&quot;&quot;&quot;</span>
+
+<span class="n">omegai_lim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">g</span> <span class="o">/</span> <span class="n">l</span><span class="p">)</span>
+<span class="c1">#omegai_lim = np.sqrt(4 * g / l)  - 1e-2 # A tester dans un second temps</span>
+
+<span class="n">tf</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">T0</span>  <span class="c1"># On modifie le temps final car on s&#39;attend à une augmentation de la période.</span>
+<span class="n">tsol_num</span><span class="p">,</span> <span class="n">Ysol_num</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">F_grand</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">omegai_lim</span><span class="p">],</span> <span class="n">h</span><span class="p">,</span> <span class="n">tf</span><span class="p">)</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Tracé graphique pour comparaison.&quot;&quot;&quot;</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Pendule aux angles quelconque&quot;</span><span class="p">)</span>
+<span class="c1"># Tracé temporel</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t(s)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;theta(rad)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tsol_num</span><span class="p">,</span> <span class="n">Ysol_num</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Solution numérique&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Portrait de phase</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;theta(rad)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;dtheta(rad/s)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tsol_num</span><span class="p">,</span> <span class="n">Ysol_num</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Solution numérique&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/meca_pendule_correction_16_0.png" src="_images/meca_pendule_correction_16_0.png" />
+</div>
+</div>
+<p>Alors que le système devrait mettre un temps infini pour attendre <span class="math notranslate nohighlight">\(\pi\)</span> et ne pas osciller, on observe que l’angle augmente indéfiniment comme une “<em>trajectoire de diffusion</em>” ! Ce n’est pas la réponse physique attendue. Le problème est numérique et a deux causes :</p>
+<ul class="simple">
+<li><p>La première et la valeur approchée des calculs des flottants. <span class="math notranslate nohighlight">\(\omega_i\)</span> calculé peut être légèrement supérieure à la valeur limite : on passe sur la trajectoire de diffusion.</p></li>
+<li><p>Même si on mets un écart (de <span class="math notranslate nohighlight">\(10^{-2}\)</span> si vous décommentez la ligne 2 du script), on observation un système qui diverge. Ce n’est donc pas que la valeur de <span class="math notranslate nohighlight">\(\omega_i\)</span> le problème mais aussi le <strong>schéma d’intégration d’Euler qui ne conserve pas l’énergie mécanique.</strong> Dans le cas présent, il a tendance à l’augmenter légèrement (on peut déjà l’observer avec la première valeur de <span class="math notranslate nohighlight">\(\omega_i\)</span> en remarquant que la valeur minimale (<span class="math notranslate nohighlight">\( \theta = 0 [2\pi]\)</span>) de la vitesse augmente au cours du temp)s).</p></li>
+</ul>
+<p>Comme expliqué à plusieurs reprises c’est un problème inhérent au schéma d’Euler explicite qui peut poser des problèmes pour des systèmes conservatifs aux temps longs (dynamique moléculaire par exemple). Une première méthode pour <em>diminuer</em> ce phénomène consiste à réduire le pas d’intégration mais au prix d’un temps de calcul qui augmente. Des algorithmes (dits <em>symplectiques</em>) permettent de résoudre ce problème en bornant l’énergie mécanique (elle fluctue mais reste dans un intervalle dont la largeur diminue avec le pas d’intégration). A titre d’exemple, on peut citer les méthodes <em>d’<a class="reference external" href="https://fr.wikipedia.org/wiki/M%C3%A9thode_d%27Euler_semi-implicite">Euler symplectique</a>, <a class="reference external" href="https://fr.wikipedia.org/wiki/M%C3%A9thode_saute-mouton">saute-mouton</a> et de <a class="reference external" href="https://fr.wikipedia.org/wiki/Int%C3%A9gration_de_Verlet">Loup-Verlet</a>.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Etude d&#39;un cas de diffusion&quot;&quot;&quot;</span>
+
+<span class="n">omegai_lim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">g</span> <span class="o">/</span> <span class="n">l</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.1</span>
+
+<span class="n">tf</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">T0</span>  <span class="c1"># On modifie le temps final car on s&#39;attend à une augmentation de la période.</span>
+<span class="n">tsol_num</span><span class="p">,</span> <span class="n">Ysol_num</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">F_grand</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">omegai_lim</span><span class="p">],</span> <span class="n">h</span><span class="p">,</span> <span class="n">tf</span><span class="p">)</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Tracé graphique pour comparaison.&quot;&quot;&quot;</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Pendule aux angles quelconque&quot;</span><span class="p">)</span>
+<span class="c1"># Tracé temporel</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t(s)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;theta(rad)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tsol_num</span><span class="p">,</span> <span class="n">Ysol_num</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Solution numérique&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Portrait de phase</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;theta(rad)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;dtheta(rad/s)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tsol_num</span><span class="p">,</span> <span class="n">Ysol_num</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Solution numérique&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/meca_pendule_correction_18_0.png" src="_images/meca_pendule_correction_18_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="complement-utilisation-d-une-methode-symplectique">
+<h2><span class="section-number">5.6. </span>Complément : Utilisation d’une méthode symplectique<a class="headerlink" href="#complement-utilisation-d-une-methode-symplectique" title="Permalink to this headline">¶</a></h2>
+<p>On présente ici l’utilisation d’Euler symplectique pour voir son influence sur l’énergie mécanique. On va le comparer avec Euler implicite.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Em</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">dtheta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calcul de l&#39;énergie mécanique&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">m</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dtheta</span> <span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">l</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+
+<span class="sd">&quot;&quot;&quot;La méthode ne se prête pas bien à l&#39;utilisation des vecteurs</span>
+<span class="sd">car on utilise v(k+1) pour calculer y(k+1) et non v(k). </span>
+<span class="sd">On doit donc changer F pour qu&#39;elle ne renvoie que la valeur pour v.</span>
+<span class="sd">On garde ici l&#39;utilisation du vecteur Y pour reprendre ce qui a déjà été</span>
+<span class="sd">écrit dans la fonction euler.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">F_symp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Renvoie la fonction F pour le schéma d&#39;Euler aux angles quelconques&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="o">-</span> <span class="n">g</span> <span class="o">/</span> <span class="n">l</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">euler_symplectique</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">Y0</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">tf</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tf</span> <span class="o">/</span> <span class="n">h</span><span class="p">)</span>  <span class="c1"># Nombre de points</span>
+    <span class="n">temps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  <span class="c1"># Vecteur des temps</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># Tableau des solutions</span>
+    <span class="n">temps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Initialisation du vecteur temps (inutile ici en réalité)</span>
+    <span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">Y0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Y0</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>  <span class="c1"># Initialisation du tableau</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>  <span class="c1"># On commence à puisqu&#39;on a déjà rempli le 0</span>
+        <span class="n">newtemps</span> <span class="o">=</span> <span class="n">temps</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">h</span>
+        <span class="n">newdtheta</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">temps</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">sol</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># Nouvelle vitesse angulaire</span>
+        <span class="n">vtheta</span> <span class="o">=</span> <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="n">newdtheta</span>
+        <span class="n">newtheta</span> <span class="o">=</span> <span class="n">sol</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="n">vtheta</span>
+        <span class="n">temps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">newtemps</span>
+        <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">newtheta</span><span class="p">,</span> <span class="n">vtheta</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">temps</span><span class="p">,</span> <span class="n">sol</span>
+
+
+<span class="sd">&quot;&quot;&quot;Etude du cas limite&quot;&quot;&quot;</span>
+
+<span class="sd">&quot;&quot;&quot;A cause de l&#39;approximation des flottants, on est obligé de prendre omegai </span>
+<span class="sd">légèrement inférieur à sa valeur limite.&quot;&quot;&quot;</span>
+<span class="n">omegai_lim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">g</span> <span class="o">/</span> <span class="n">l</span><span class="p">)</span>
+<span class="c1">#omegai_lim = np.sqrt(4 * g / l)  - 1e-4 # A tester dans un second temps</span>
+<span class="c1">#omegai_lim = np.sqrt(4 * g / l)  - 0.5 # A tester dans un troisième temps</span>
+
+<span class="n">tf</span> <span class="o">=</span> <span class="mi">50</span> <span class="o">*</span> <span class="n">T0</span>  <span class="c1"># On modifie le temps final car on s&#39;attend à une augmentation de la période.</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">T0</span> <span class="o">/</span> <span class="mf">1e3</span>  <span class="c1"># On diminue h pour des questions de temps de calcul (observation sur un temps long)</span>
+<span class="n">tsol_num</span><span class="p">,</span> <span class="n">Ysol_num</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">F_grand</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">omegai_lim</span><span class="p">],</span> <span class="n">h</span><span class="p">,</span> <span class="n">tf</span><span class="p">)</span>
+<span class="n">tsol_num2</span><span class="p">,</span> <span class="n">Ysol_num2</span> <span class="o">=</span> <span class="n">euler_symplectique</span><span class="p">(</span><span class="n">F_symp</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">omegai_lim</span><span class="p">],</span> <span class="n">h</span><span class="p">,</span> <span class="n">tf</span><span class="p">)</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Tracé graphique pour comparaison.&quot;&quot;&quot;</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Pendule aux angles quelconque&quot;</span><span class="p">)</span>
+<span class="c1"># Tracé temporel</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t(s)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;theta(rad)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tsol_num</span><span class="p">,</span> <span class="n">Ysol_num</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Explicite&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tsol_num2</span><span class="p">,</span> <span class="n">Ysol_num2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Symplectique&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Portrait de phase</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;theta(rad)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Em(J)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tsol_num</span><span class="p">,</span> <span class="n">Em</span><span class="p">(</span><span class="n">Ysol_num</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">Ysol_num</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Explicite&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tsol_num2</span><span class="p">,</span> <span class="n">Em</span><span class="p">(</span><span class="n">Ysol_num2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">Ysol_num2</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Symplectique&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/meca_pendule_correction_20_0.png" src="_images/meca_pendule_correction_20_0.png" />
+</div>
+</div>
+<p>On observe :</p>
+<ul class="simple">
+<li><p>Si on se place à la valeur limite, les deux méthodes donnent un état de diffusion. Ce n’est pas la méthode qui est responsable mais l’approximation dans le calcul de <span class="math notranslate nohighlight">\(\omega_i\)</span> qui fait basculer dans cet état. On remarque néanmoins que même en état de diffusion, l’énergie est bornée avec Euler symplectique alors qu’elle augmente sans cesse avec Euler implicite.</p></li>
+<li><p>Si on se place légèrement en dessous de la valeur limite (<span class="math notranslate nohighlight">\(10^{-4} rad\)</span> en dessous), Euler symplectique reste bien dans un état lié alors qu’Euler explicite tombe presque immédiatement dans un état de diffusion : cette fois c’est uniquement la dérive énergétique qui en est responsable.</p></li>
+<li><p>Cette dérive existe même à plus faible amplitude comme le montre le troisième exemple : l’énergie mécanique augmentant (<strong>artificiellement on le rappelle</strong>), elle finit par dépasse le seuil de l’état de diffusion.</p></li>
+</ul>
+<p>C’est donc un problème pour l’étude de système sur un temps long (on rappelle qu’en pratique, l’énergie mécanique DOIT être constante pour un système conservatif) : par exemple pour le mouvement des planètes. On observera à nouveau ce problème qui conduit à utiliser des méthodes comme Euler symplectique où on observe une énergie mécanique fluctuant mais bornée.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="meca_non_lineaire_correction.html" title="previous page"><span class="section-number">4. </span>Système conservatif : Effets non linéaires.</a>
+    <a class='right-next' id="next-link" href="meca_force_centrale_correction.html" title="next page"><span class="section-number">6. </span>Etude d’un mouvement à force centrale</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By C. Lacpatia<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
